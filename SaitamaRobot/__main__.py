@@ -67,13 +67,10 @@ Mənimlə Birlikdə Qruparıvı idarə Edə Bilərsən! :-)
 
 əmrlər / və ya ! ilə işlədilir
 
-Və:
-
 {}
-And the following:
 """.format(
     dispatcher.bot.first_name, ""
-    if not ALLOW_EXCL else "\nAll commands can either be used with / or !.\n")
+    if not ALLOW_EXCL else "\nVə əlavələr:\n")
 
 SAITAMA_IMG = "https://i.ibb.co/ZztgP6F/photo-2021-01-26-01-54-03.jpg"
 

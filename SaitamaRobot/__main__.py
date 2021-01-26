@@ -210,7 +210,7 @@ def start(update: Update, context: CallbackContext):
                      [
                          InlineKeyboardButton(
                              text="Botlarımız 💻",
-                             url="https://t.me/XTDBotOfficial")
+                             url="https://t.me/XTDBotFather")
                      ]]))
     else:
         update.effective_message.reply_text(

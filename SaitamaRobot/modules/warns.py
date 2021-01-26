@@ -143,7 +143,7 @@ def button(update: Update, context: CallbackContext) -> str:
         res = sql.remove_warn(user_id, chat.id)
         if res:
             update.effective_message.edit_text(
-                "Warn removed by {}.".format(
+                "Xəbərdarlıq Admin tərəfindən qaldırıldı {}.".format(
                     mention_html(user.id, user.first_name)),
                 parse_mode=ParseMode.HTML)
             user_member = chat.get_member(user_id)
@@ -180,7 +180,7 @@ def warn_user(update: Update, context: CallbackContext) -> str:
             return warn(
                 chat.get_member(user_id).user, chat, reason, message, warner)
     else:
-        message.reply_text("That looks like an invalid User ID to me.")
+        message.reply_text("İstifadəçi Haqqında  Məlumatım Yoxdur! İd Nömrəsiylə Yoxlayın !")
     return ""
 
 
@@ -205,7 +205,7 @@ def reset_warns(update: Update, context: CallbackContext) -> str:
                 f"<b>Admin:</b> {mention_html(user.id, user.first_name)}\n"
                 f"<b>User:</b> {mention_html(warned.id, warned.first_name)}")
     else:
-        message.reply_text("No user has been designated!")
+        message.reply_text("Heç bir istifadəçi təyin edilməyib!")
     return ""
 
 
@@ -222,7 +222,7 @@ def warns(update: Update, context: CallbackContext):
         limit, soft_warn = sql.get_warn_setting(chat.id)
 
         if reasons:
-            text = f"This user has {num_warns}/{limit} warns, for the following reasons:"
+            text = f"Bu istifadəçi  {num_warns}/{limit} aşağıdakı səbəblərdən xəbərdarlıq edildi"
             for reason in reasons:
                 text += f"\n • {reason}"
 
@@ -293,13 +293,13 @@ def remove_warn_filter(update: Update, context: CallbackContext):
     chat_filters = sql.get_chat_warn_triggers(chat.id)
 
     if not chat_filters:
-        msg.reply_text("No warning filters are active here!")
+        msg.reply_text("Burada heç bir xəbərdarlıq filtri aktiv deyil!")
         return
 
     for filt in chat_filters:
         if filt == to_remove:
             sql.remove_warn_filter(chat.id, to_remove)
-            msg.reply_text("Okay, I'll stop warning people for that.")
+            msg.reply_text("Yaxşı, bunun üçün insanları xəbərdar etməyi dayandırdım")
             raise DispatcherHandlerStop
 
     msg.reply_text(
@@ -314,7 +314,7 @@ def list_warn_filters(update: Update, context: CallbackContext):
 
     if not all_handlers:
         update.effective_message.reply_text(
-            "No warning filters are active here!")
+            "Burada heç bir xəbərdarlıq filtri aktiv deyil!")
         return
 
     filter_list = CURRENT_WARNING_FILTER_STRING
@@ -371,7 +371,7 @@ def set_warn_limit(update: Update, context: CallbackContext) -> str:
     if args:
         if args[0].isdigit():
             if int(args[0]) < 3:
-                msg.reply_text("The minimum warn limit is 3!")
+                msg.reply_text("Minimum xəbərdarlıq həddi 3-dür!")
             else:
                 sql.set_warn_limit(chat.id, int(args[0]))
                 msg.reply_text("Updated the warn limit to {}".format(args[0]))
@@ -385,7 +385,7 @@ def set_warn_limit(update: Update, context: CallbackContext) -> str:
     else:
         limit, soft_warn = sql.get_warn_setting(chat.id)
 
-        msg.reply_text("The current warn limit is {}".format(limit))
+        msg.reply_text("Cari xəbərdarlıq həddi {}".format(limit))
     return ""
 
 
@@ -400,22 +400,22 @@ def set_warn_strength(update: Update, context: CallbackContext):
     if args:
         if args[0].lower() in ("on", "yes"):
             sql.set_warn_strength(chat.id, False)
-            msg.reply_text("Too many warns will now result in a Ban!")
+            msg.reply_text("Çox xəbərdarlıq artıq qadağa ilə nəticələnəcək!")
             return (
                 f"<b>{html.escape(chat.title)}:</b>\n"
                 f"<b>Admin:</b> {mention_html(user.id, user.first_name)}\n"
-                f"Has enabled strong warns. Users will be seriously punched.(banned)"
+                f"Güclü xəbərdarlıqları təmin etdi. İstifadəçilər ciddi şəkildə yumruqlanacaq. (Ban)"
             )
 
         elif args[0].lower() in ("off", "no"):
             sql.set_warn_strength(chat.id, True)
             msg.reply_text(
-                "Too many warns will now result in a normal punch! Users will be able to join again after."
+                "Artıq çox xəbərdarlıq normal bir yumruqla nəticələnəcəkdir! İstifadəçilər bundan sonra yenidən qoşula biləcəklər."
             )
             return (
                 f"<b>{html.escape(chat.title)}:</b>\n"
                 f"<b>Admin:</b> {mention_html(user.id, user.first_name)}\n"
-                f"Has disabled strong punches. I will use normal punch on users."
+                f"Güclü yumruqları əlil etdi. İstifadəçilərdə normal yumruqdan istifadə edəcəyəm."
             )
 
         else:

@@ -77,9 +77,9 @@ def warn(user: User,
         else:  # ban
             chat.kick_member(user.id)
             reply = (
-                f"<code>❕</code><b>Ban Event</b>\n"
-                f"<code> </code><b>•  User:</b> {mention_html(user.id, user.first_name)}\n"
-                f"<code> </code><b>•  Count:</b> {limit}")
+                f"<code>❕</code><b>Ban !</b>\n"
+                f"<code> </code><b>•  İstifadəçi</b> {mention_html(user.id, user.first_name)}\n"
+                f"<code> </code><b>•  Say:</b> {limit}")
 
         for warn_reason in reasons:
             reply += f"\n - {html.escape(warn_reason)}"
@@ -89,29 +89,29 @@ def warn(user: User,
         log_reason = (f"<b>{html.escape(chat.title)}:</b>\n"
                       f"#WARN_BAN\n"
                       f"<b>Admin:</b> {warner_tag}\n"
-                      f"<b>User:</b> {mention_html(user.id, user.first_name)}\n"
-                      f"<b>Reason:</b> {reason}\n"
-                      f"<b>Counts:</b> <code>{num_warns}/{limit}</code>")
+                      f"<b>İstifadəçi:</b> {mention_html(user.id, user.first_name)}\n"
+                      f"<b>Səbəb:</b> {reason}\n"
+                      f"<b>Say:</b> <code>{num_warns}/{limit}</code>")
 
     else:
         keyboard = InlineKeyboardMarkup([[
             InlineKeyboardButton(
-                "🔘 Remove warn", callback_data="rm_warn({})".format(user.id))
+                "🔘 Xəbərdarlıqı Qaldır", callback_data="rm_warn({})".format(user.id))
         ]])
 
         reply = (
-            f"<code>❕</code><b>Warn Event</b>\n"
-            f"<code> </code><b>•  User:</b> {mention_html(user.id, user.first_name)}\n"
-            f"<code> </code><b>•  Count:</b> {num_warns}/{limit}")
+            f"<code>❕</code><b>Xəbərdarlıq !</b>\n"
+            f"<code> </code><b>•  İstifadəçi:</b> {mention_html(user.id, user.first_name)}\n"
+            f"<code> </code><b>•  Say:</b> {num_warns}/{limit}")
         if reason:
-            reply += f"\n<code> </code><b>•  Reason:</b> {html.escape(reason)}"
+            reply += f"\n<code> </code><b>• Səbəb </b> {html.escape(reason)}"
 
         log_reason = (f"<b>{html.escape(chat.title)}:</b>\n"
                       f"#WARN\n"
                       f"<b>Admin:</b> {warner_tag}\n"
-                      f"<b>User:</b> {mention_html(user.id, user.first_name)}\n"
-                      f"<b>Reason:</b> {reason}\n"
-                      f"<b>Counts:</b> <code>{num_warns}/{limit}</code>")
+                      f"<b>İstifadəçi:</b> {mention_html(user.id, user.first_name)}\n"
+                      f"<b>Səbəb:</b> {reason}\n"
+                      f"<b>Say:</b> <code>{num_warns}/{limit}</code>")
 
     try:
         message.reply_text(
@@ -151,11 +151,11 @@ def button(update: Update, context: CallbackContext) -> str:
                 f"<b>{html.escape(chat.title)}:</b>\n"
                 f"#UNWARN\n"
                 f"<b>Admin:</b> {mention_html(user.id, user.first_name)}\n"
-                f"<b>User:</b> {mention_html(user_member.user.id, user_member.user.first_name)}"
+                f"<b>İstifadəçi:</b> {mention_html(user_member.user.id, user_member.user.first_name)}"
             )
         else:
             update.effective_message.edit_text(
-                "User already has no warns.", parse_mode=ParseMode.HTML)
+                "İstifadəçinin onsuz da xəbərdarlığı yoxdu.", parse_mode=ParseMode.HTML)
 
     return ""
 

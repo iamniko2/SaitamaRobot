@@ -461,17 +461,17 @@ def get_settings(update: Update, context: CallbackContext):
     # ONLY send settings in PM
     if chat.type != chat.PRIVATE:
         if is_user_admin(chat, user.id):
-            text = "Click here to get this chat's settings, as well as yours."
+            text = "Ayarlarınızı Dəyişdirmək Üçün Aşaqda Olan ”Ayarlar” Bölməsinə Basın 🤴"
             msg.reply_text(
                 text,
                 reply_markup=InlineKeyboardMarkup([[
                     InlineKeyboardButton(
-                        text="Settings",
+                        text="Ayarlar",
                         url="t.me/{}?start=stngs_{}".format(
                             context.bot.username, chat.id))
                 ]]))
         else:
-            text = "Click here to check your settings."
+            text = "Ayarlarınızı yoxlamaq üçün bura vurun"
 
     else:
         send_settings(chat.id, user.id, True)

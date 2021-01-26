@@ -92,17 +92,17 @@ def send(update, message, keyboard, backup_message):
             msg = update.effective_message.reply_text(
                 markdown_parser(
                     backup_message +
-                    "\nNote: the current message has an invalid url "
-                    "in one of its buttons. Please update."),
+                    "\nNote: cari mesaj etibarsız bir url var"
+                    "düymələrindən birində. Zəhmət olmasa yeniləyin."),
                 parse_mode=ParseMode.MARKDOWN,
                 reply_to_message_id=reply,
             )
         elif excp.message == "Unsupported url protocol":
             msg = update.effective_message.reply_text(
                 markdown_parser(backup_message +
-                                "\nNote: the current message has buttons which "
-                                "use url protocols that are unsupported by "
-                                "telegram. Please update."),
+                                "\nNote: cari mesajda olan düymələr var "
+                                "url protokollarından istifadə edin."
+                                "Telegramı Zəhmət olmasa yeniləyin."),
                 parse_mode=ParseMode.MARKDOWN,
                 reply_to_message_id=reply,
             )
@@ -177,7 +177,7 @@ def new_member(update: Update, context: CallbackContext):
             # Give the owner a special welcome
             if new_mem.id == OWNER_ID:
                 update.effective_message.reply_text(
-                    "Oh, Genos? Let's get this moving.",
+                    "Oh Boss Səni Axtarırdıq !",
                     reply_to_message_id=reply)
                 welcome_log = (f"{html.escape(chat.title)}\n"
                                f"#USER_JOINED\n"
@@ -187,7 +187,7 @@ def new_member(update: Update, context: CallbackContext):
             # Welcome Devs
             elif new_mem.id in DEV_USERS:
                 update.effective_message.reply_text(
-                    "Whoa! A member of the Heroes Association just joined!",
+                    "Vay! Qəhrəmanlar Dərnəyinin üzvü yenicə qatıldı!",
                     reply_to_message_id=reply,
                 )
                 continue
@@ -195,7 +195,7 @@ def new_member(update: Update, context: CallbackContext):
             # Welcome Sudos
             elif new_mem.id in DRAGONS:
                 update.effective_message.reply_text(
-                    "Huh! A Dragon disaster just joined! Stay Alert!",
+                    "Hə! Bir əjdaha fəlakəti yeni qatıldı! Xəbərdar olun!",
                     reply_to_message_id=reply,
                 )
                 continue
@@ -203,7 +203,7 @@ def new_member(update: Update, context: CallbackContext):
             # Welcome Support
             elif new_mem.id in DEMONS:
                 update.effective_message.reply_text(
-                    "Huh! Someone with a Demon disaster level just joined!",
+                    "Hə! Demon fəlakət səviyyəsinə sahib biri yenicə qatıldı!",
                     reply_to_message_id=reply,
                 )
                 continue
@@ -211,14 +211,14 @@ def new_member(update: Update, context: CallbackContext):
             # Welcome Whitelisted
             elif new_mem.id in TIGERS:
                 update.effective_message.reply_text(
-                    "Oof! A Tiger disaster just joined!",
+                    "Səni Görmeyimə Sevindim!"
                     reply_to_message_id=reply)
                 continue
 
             # Welcome Tigers
             elif new_mem.id in WOLVES:
                 update.effective_message.reply_text(
-                    "Oof! A Wolf disaster just joined!",
+                    "Darıxmışdşq!",
                     reply_to_message_id=reply)
                 continue
 
@@ -233,7 +233,7 @@ def new_member(update: Update, context: CallbackContext):
                 if creator:
                     bot.send_message(
                         JOIN_LOGGER,
-                        "#NEW_GROUP\n<b>Group name:</b> {}\n<b>ID:</b> <code>{}</code>\n<b>Creator:</b> <code>{}</code>"
+                        "#NEW_GROUP\n<b>Qrup Adı:</b> {}\n<b>ID:</b> <code>{}</code>\n<b>Creator:</b> <code>{}</code>"
                         .format(
                             html.escape(chat.title), chat.id,
                             html.escape(creator)),
@@ -241,7 +241,7 @@ def new_member(update: Update, context: CallbackContext):
                 else:
                     bot.send_message(
                         JOIN_LOGGER,
-                        "#NEW_GROUP\n<b>Group name:</b> {}\n<b>ID:</b> <code>{}</code>"
+                        "#NEW_GROUP\n<b>Qrup Adı:</b> {}\n<b>ID:</b> <code>{}</code>"
                         .format(html.escape(chat.title), chat.id),
                         parse_mode=ParseMode.HTML)
                 update.effective_message.reply_text(
@@ -363,10 +363,10 @@ def new_member(update: Update, context: CallbackContext):
                         })
                     new_join_mem = f'<a href="tg://user?id={user.id}">{html.escape(new_mem.first_name)}</a>'
                     message = msg.reply_text(
-                        f"{new_join_mem}, click the button below to prove you're human.\nYou have 120 seconds.",
+                        f"{new_join_mem}, botun səni susdurmasın isdəmirsənsə Butona Bas !.\nSənin 120 Saniyen var",
                         reply_markup=InlineKeyboardMarkup([{
                             InlineKeyboardButton(
-                                text="Yes, I'm human.",
+                                text="Hə! Məni Susdurma.",
                                 callback_data=f"user_join_({new_mem.id})",
                             )
                         }]),
@@ -421,7 +421,7 @@ def new_member(update: Update, context: CallbackContext):
 
         return (f"{html.escape(chat.title)}\n"
                 f"#USER_JOINED\n"
-                f"<b>User</b>: {mention_html(user.id, user.first_name)}\n"
+                  f"<b>İstifadəçi</b>: {mention_html(user.id, user.first_name)}\n"
                 f"<b>ID</b>: <code>{user.id}</code>")
 
     return ""
@@ -489,13 +489,13 @@ def left_member(update: Update, context: CallbackContext):
             # Give the owner a special goodbye
             if left_mem.id == OWNER_ID:
                 update.effective_message.reply_text(
-                    "Oi! Genos! He left..", reply_to_message_id=reply)
+                    "Təkrar Gözliyəcəm!", reply_to_message_id=reply)
                 return
 
             # Give the devs a special goodbye
             elif left_mem.id in DEV_USERS:
                 update.effective_message.reply_text(
-                    "See you later at the Hero's Association!",
+                    "Belə Olmamalıydı!",
                     reply_to_message_id=reply,
                 )
                 return
@@ -565,8 +565,8 @@ def welcome(update: Update, context: CallbackContext):
         noformat = True
         pref, welcome_m, cust_content, welcome_type = sql.get_welc_pref(chat.id)
         update.effective_message.reply_text(
-            f"This chat has it's welcome setting set to: `{pref}`.\n"
-            f"*The welcome message (not filling the {{}}) is:*",
+            f"Bu söhbət xoş qarşılama ayarı olaraq qurulub: `{pref}`.\n"
+            f"*Xoş Gəldin Mesajı (not filling the {{}}) is:*",
             parse_mode=ParseMode.MARKDOWN,
         )
 
@@ -604,16 +604,16 @@ def welcome(update: Update, context: CallbackContext):
         if args[0].lower() in ("on", "yes"):
             sql.set_welc_preference(str(chat.id), True)
             update.effective_message.reply_text(
-                "Okay! I'll greet members when they join.")
+                "Tamam! Yeni Üzvlər qoşulduqda salamlayacam.")
 
         elif args[0].lower() in ("off", "no"):
             sql.set_welc_preference(str(chat.id), False)
             update.effective_message.reply_text(
-                "I'll go loaf around and not welcome anyone then.")
+                "Tamam! Yeni Üzvlər qoşulduqda səssiz qalacam.")
 
         else:
             update.effective_message.reply_text(
-                "I understand 'on/yes' or 'off/no' only!")
+                "Yalnız  'on/yes' və ya 'off/no' olduğunu başa düşürəm!")
 
 
 @run_async
@@ -663,7 +663,7 @@ def goodbye(update: Update, context: CallbackContext):
         else:
             # idek what you're writing, say yes or no
             update.effective_message.reply_text(
-                "I understand 'on/yes' or 'off/no' only!")
+                "Yalnız  'on/yes' və ya 'off/no' olduğunu başa düşürəm!")
 
 
 @run_async
@@ -677,16 +677,16 @@ def set_welcome(update: Update, context: CallbackContext) -> str:
     text, data_type, content, buttons = get_welcome_type(msg)
 
     if data_type is None:
-        msg.reply_text("You didn't specify what to reply with!")
+        msg.reply_text("Nə cavab verəcəyinizi müəyyən etməmisiniz!")
         return ""
 
     sql.set_custom_welcome(chat.id, content, text, data_type, buttons)
-    msg.reply_text("Successfully set custom welcome message!")
+    msg.reply_text("Xüsusi qarşılama mesajı uğurla təyin edildi!")
 
     return (f"<b>{html.escape(chat.title)}:</b>\n"
             f"#SET_WELCOME\n"
             f"<b>Admin:</b> {mention_html(user.id, user.first_name)}\n"
-            f"Set the welcome message.")
+            f"Salamlama mesajını təyin edin.")
 
 
 @run_async
@@ -698,12 +698,12 @@ def reset_welcome(update: Update, context: CallbackContext) -> str:
 
     sql.set_custom_welcome(chat.id, None, sql.DEFAULT_WELCOME, sql.Types.TEXT)
     update.effective_message.reply_text(
-        "Successfully reset welcome message to default!")
+        "Xüsusi qarşılama mesajı uğurla Dəyişdirildi!")
 
     return (f"<b>{html.escape(chat.title)}:</b>\n"
             f"#RESET_WELCOME\n"
             f"<b>Admin:</b> {mention_html(user.id, user.first_name)}\n"
-            f"Reset the welcome message to default.")
+            f"Qarşılama mesajını standart olaraq sıfırlayın.")
 
 
 @run_async
@@ -716,15 +716,15 @@ def set_goodbye(update: Update, context: CallbackContext) -> str:
     text, data_type, content, buttons = get_welcome_type(msg)
 
     if data_type is None:
-        msg.reply_text("You didn't specify what to reply with!")
+        msg.reply_text("Nə cavab verəcəyinizi müəyyən etməmisiniz!")
         return ""
 
     sql.set_custom_gdbye(chat.id, content or text, data_type, buttons)
-    msg.reply_text("Successfully set custom goodbye message!")
+    msg.reply_text("Xüsusi vida mesajı müvəffəqiyyətlə quruldu!")
     return (f"<b>{html.escape(chat.title)}:</b>\n"
             f"#SET_GOODBYE\n"
             f"<b>Admin:</b> {mention_html(user.id, user.first_name)}\n"
-            f"Set the goodbye message.")
+            f"Əlvida mesajını təyin edin.")
 
 
 @run_async
@@ -736,12 +736,12 @@ def reset_goodbye(update: Update, context: CallbackContext) -> str:
 
     sql.set_custom_gdbye(chat.id, sql.DEFAULT_GOODBYE, sql.Types.TEXT)
     update.effective_message.reply_text(
-        "Successfully reset goodbye message to default!")
+        "Xüsusi vida mesajı müvəffəqiyyətlə Dəyişirildi!")
 
     return (f"<b>{html.escape(chat.title)}:</b>\n"
             f"#RESET_GOODBYE\n"
             f"<b>Admin:</b> {mention_html(user.id, user.first_name)}\n"
-            f"Reset the goodbye message.")
+            f"Əlvida mesajını sıfırlayın.")
 
 
 @run_async
@@ -756,31 +756,31 @@ def welcomemute(update: Update, context: CallbackContext) -> str:
     if len(args) >= 1:
         if args[0].lower() in ("off", "no"):
             sql.set_welcome_mutes(chat.id, False)
-            msg.reply_text("I will no longer mute people on joining!")
+            msg.reply_text("Artıq insanları qoşulmağa səssiz qoymayacağam!")
             return (
                 f"<b>{html.escape(chat.title)}:</b>\n"
                 f"#WELCOME_MUTE\n"
                 f"<b>• Admin:</b> {mention_html(user.id, user.first_name)}\n"
-                f"Has toggled welcome mute to <b>OFF</b>.")
+                f"Qarşıdan gələn səssizliyi dəyişdirdi<b>OFF</b>.")
         elif args[0].lower() in ["soft"]:
             sql.set_welcome_mutes(chat.id, "soft")
             msg.reply_text(
-                "I will restrict users' permission to send media for 24 hours.")
+                "İstifadəçilərin media göndərmək icazəsini 24 saat məhdudlaşdıracağam.")
             return (
                 f"<b>{html.escape(chat.title)}:</b>\n"
                 f"#WELCOME_MUTE\n"
                 f"<b>• Admin:</b> {mention_html(user.id, user.first_name)}\n"
-                f"Has toggled welcome mute to <b>SOFT</b>.")
+                f"Qarşıdan gələn səssizliyi dəyişdirdi <b>SOFT</b>.")
         elif args[0].lower() in ["strong"]:
             sql.set_welcome_mutes(chat.id, "strong")
             msg.reply_text(
-                "I will now mute people when they join until they prove they're not a bot.\nThey will have 120seconds before they get kicked."
+                "Artıq bot olmadıqlarını sübut edənə qədər insanları qatıldıqda səssizləşdirəcəyəm.\nOnlar vurulmadan əvvəl 120 saniyə olacaqlar."
             )
             return (
                 f"<b>{html.escape(chat.title)}:</b>\n"
                 f"#WELCOME_MUTE\n"
                 f"<b>• Admin:</b> {mention_html(user.id, user.first_name)}\n"
-                f"Has toggled welcome mute to <b>STRONG</b>.")
+                f"Xoş səssizliyi dəyişdirdito <b>STRONG</b>.")
         else:
             msg.reply_text(
                 "Please enter <code>off</code>/<code>no</code>/<code>soft</code>/<code>strong</code>!",
@@ -808,20 +808,20 @@ def clean_welcome(update: Update, context: CallbackContext) -> str:
         clean_pref = sql.get_clean_pref(chat.id)
         if clean_pref:
             update.effective_message.reply_text(
-                "I should be deleting welcome messages up to two days old.")
+                "İki günə qədər salamlama mesajlarını silməyim lazımdır.")
         else:
             update.effective_message.reply_text(
-                "I'm currently not deleting old welcome messages!")
+                "Hazırda köhnə salamlama mesajlarını silmirəm!")
         return ""
 
     if args[0].lower() in ("on", "yes"):
         sql.set_clean_welcome(str(chat.id), True)
         update.effective_message.reply_text(
-            "I'll try to delete old welcome messages!")
+            "Köhnə salamlama mesajlarını silməyə çalışacağam!")
         return (f"<b>{html.escape(chat.title)}:</b>\n"
                 f"#CLEAN_WELCOME\n"
                 f"<b>Admin:</b> {mention_html(user.id, user.first_name)}\n"
-                f"Has toggled clean welcomes to <code>ON</code>.")
+                f"Təmiz qarşılayır <code>ON</code>.")
     elif args[0].lower() in ("off", "no"):
         sql.set_clean_welcome(str(chat.id), False)
         update.effective_message.reply_text(
@@ -829,7 +829,7 @@ def clean_welcome(update: Update, context: CallbackContext) -> str:
         return (f"<b>{html.escape(chat.title)}:</b>\n"
                 f"#CLEAN_WELCOME\n"
                 f"<b>Admin:</b> {mention_html(user.id, user.first_name)}\n"
-                f"Has toggled clean welcomes to <code>OFF</code>.")
+                f"Təmiz qarşılayır <code>OFF</code>.")
     else:
         update.effective_message.reply_text(
             "I understand 'on/yes' or 'off/no' only!")
@@ -847,27 +847,27 @@ def cleanservice(update: Update, context: CallbackContext) -> str:
             if var in ("no", "off"):
                 sql.set_clean_service(chat.id, False)
                 update.effective_message.reply_text(
-                    "Welcome clean service is : off")
+                    "Qarşılama təmiz xidmətdir: off")
             elif var in ("yes", "on"):
                 sql.set_clean_service(chat.id, True)
                 update.effective_message.reply_text(
-                    "Welcome clean service is : on")
+                    "Qarşılama təmiz xidmətdir : on")
             else:
                 update.effective_message.reply_text(
                     "Invalid option", parse_mode=ParseMode.HTML)
         else:
             update.effective_message.reply_text(
-                "Usage is <code>on</code>/<code>yes</code> or <code>off</code>/<code>no</code>",
+                "İstifadəsi <code>on</code>/<code>yes</code> or <code>off</code>/<code>no</code>",
                 parse_mode=ParseMode.HTML)
     else:
         curr = sql.clean_service(chat.id)
         if curr:
             update.effective_message.reply_text(
-                "Welcome clean service is : <code>on</code>",
+                "Qarşılama təmiz xidmətdir : <code>on</code>",
                 parse_mode=ParseMode.HTML)
         else:
             update.effective_message.reply_text(
-                "Welcome clean service is : <code>off</code>",
+                "Xoş təmiz xidmətdir: <code>off</code>",
                 parse_mode=ParseMode.HTML)
 
 
@@ -933,7 +933,7 @@ def user_button(update: Update, context: CallbackContext):
                     sql.set_clean_welcome(chat.id, sent.message_id)
 
     else:
-        query.answer(text="You're not allowed to do this!")
+        query.answer(text="Bunu etməyə icazə verilmir!")
 
 
 WELC_HELP_TXT = (

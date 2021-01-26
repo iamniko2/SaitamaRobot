@@ -164,7 +164,7 @@ async def group_info(event) -> None:
         ch_full = await event.client(GetFullChannelRequest(channel=entity))
     except:
         await event.reply(
-            "Can't for some reason, maybe it is a private one or that I am banned there."
+            "Nədənsə edə bilmərəm, bəlkə özəldir və ya orada qadağan olunmuşam."
         )
         return
     msg = f"**ID**: `{entity.id}`"
@@ -196,7 +196,7 @@ def gifid(update: Update, context: CallbackContext):
             parse_mode=ParseMode.HTML)
     else:
         update.effective_message.reply_text(
-            "Please reply to a gif to get its ID.")
+            "Zəhmət olmasa bir gif-ə idin almaq üçün cavab verin.")
 
 
 @run_async
@@ -217,18 +217,18 @@ def info(update: Update, context: CallbackContext):
         (len(args) >= 1 and not args[0].startswith("@") and
          not args[0].isdigit() and
          not message.parse_entities([MessageEntity.TEXT_MENTION]))):
-        message.reply_text("I can't extract a user from this.")
+        message.reply_text("Bir istifadəçini bundan çıxara bilmirəm.")
         return
 
     else:
         return
 
     rep = message.reply_text(
-        "<code>Appraising...</code>", parse_mode=ParseMode.HTML)
+        "<code>Gətirilir...</code>", parse_mode=ParseMode.HTML)
 
     text = (f"╒═══「<b> Məlumat:</b> 」\n"
             f"ID: <code>{user.id}</code>\n"
-            f"AD: {html.escape(user.first_name)}")
+            f"Ad: {html.escape(user.first_name)}")
 
     if user.last_name:
         text += f"\nSoyad: {html.escape(user.last_name)}"
@@ -337,10 +337,10 @@ def about_me(update: Update, context: CallbackContext):
     elif message.reply_to_message:
         username = message.reply_to_message.from_user.first_name
         update.effective_message.reply_text(
-            f"{username} hasn't set an info message about themselves yet!")
+            f"{username} hələ özləri haqqında bir məlumat mesajı təyin etməyib!")
     else:
         update.effective_message.reply_text(
-            "There isnt one, use /setme to set one.")
+            "Biri yoxdur, birini təyin etmək üçün / setme istifadə edin.")
 
 
 @run_async
@@ -348,7 +348,7 @@ def set_about_me(update: Update, context: CallbackContext):
     message = update.effective_message
     user_id = message.from_user.id
     if user_id in [777000, 1087968824]:
-        message.reply_text("Error! Unauthorized")
+        message.reply_text("Xəta! İcazəsiz")
         return
     bot = context.bot
     if message.reply_to_message:
@@ -363,15 +363,15 @@ def set_about_me(update: Update, context: CallbackContext):
         if len(info[1]) < MAX_MESSAGE_LENGTH // 4:
             sql.set_user_me_info(user_id, info[1])
             if user_id in [777000, 1087968824]:
-                message.reply_text("Authorized...Information updated!")
+                message.reply_text("Məlumat yeniləndi!")
             elif user_id == bot.id:
                 message.reply_text(
-                    "I have updated my info with the one you provided!")
+                    "Məlumatınızı təqdim etdiyiniz məlumatla yenilədim!")
             else:
                 message.reply_text("Information updated!")
         else:
             message.reply_text(
-                "The info needs to be under {} characters! You have {}.".format(
+                "Məlumat {} simvoldan aşağı olmalıdır! You have {}.".format(
                     MAX_MESSAGE_LENGTH // 4, len(info[1])))
 
 
@@ -412,7 +412,7 @@ def about_bio(update: Update, context: CallbackContext):
         )
     else:
         update.effective_message.reply_text(
-            "You haven't had a bio set about yourself yet!")
+            "Hələ özünüz haqqında bioloji dəstiniz yoxdur!")
 
 
 @run_async
@@ -427,17 +427,17 @@ def set_about_bio(update: Update, context: CallbackContext):
 
         if user_id == message.from_user.id:
             message.reply_text(
-                "Ha, you can't set your own bio! You're at the mercy of others here..."
+                "Ha, öz bioqrafını təyin edə bilməzsən! Burada başqalarının mərhəmətindəsən ..."
             )
             return
 
         if user_id in [777000, 1087968824] and sender_id not in DEV_USERS:
-            message.reply_text("You are not authorised")
+            message.reply_text("Səlahiyyətli deyilsiniz")
             return
 
         if user_id == bot.id and sender_id not in DEV_USERS:
             message.reply_text(
-                "Erm... yeah, I only trust Heroes Association to set my bio.")
+                "Bəli ... bəli, yalnız biomuzu qurmaq üçün Qəhrəmanlar Dərnəyinə etibar edirəm.")
             return
 
         text = message.text
@@ -455,7 +455,7 @@ def set_about_bio(update: Update, context: CallbackContext):
                     "Bio needs to be under {} characters! You tried to set {}."
                     .format(MAX_MESSAGE_LENGTH // 4, len(bio[1])))
     else:
-        message.reply_text("Reply to someone to set their bio!")
+        message.reply_text("Bio-nu təyin etmək üçün kiməsə cavab verin!")
 
 
 def __user_info__(user_id):
@@ -463,9 +463,9 @@ def __user_info__(user_id):
     me = html.escape(sql.get_user_me_info(user_id) or "")
     result = ""
     if me:
-        result += f"<b>About user:</b>\n{me}\n"
+        result += f"<b>İstifadəçi haqqında:</b>\n{me}\n"
     if bio:
-        result += f"<b>What others say:</b>\n{bio}\n"
+        result += f"<b>Başqalarının dedikləri:</b>\n{bio}\n"
     result = result.strip("\n")
     return result
 

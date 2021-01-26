@@ -226,20 +226,20 @@ def info(update: Update, context: CallbackContext):
     rep = message.reply_text(
         "<code>Appraising...</code>", parse_mode=ParseMode.HTML)
 
-    text = (f"╒═══「<b> Məlumat:</b> 」\n"
+    text = (f"╒═══「<b> Appraisal results:</b> 」\n"
             f"ID: <code>{user.id}</code>\n"
-            f"Ad: {html.escape(user.first_name)}")
+            f"First Name: {html.escape(user.first_name)}")
 
     if user.last_name:
-        text += f"\nSoyad: {html.escape(user.last_name)}"
+        text += f"\nLast Name: {html.escape(user.last_name)}"
 
     if user.username:
         text += f"\nUsername: @{html.escape(user.username)}"
 
-    text += f"\nLink: {mention_html(user.id, 'link')}"
+    text += f"\nPermalink: {mention_html(user.id, 'link')}"
 
     if chat.type != "private" and user_id != bot.id:
-        _stext = "\nVezifesi: <code>{}</code>"
+        _stext = "\nPresence: <code>{}</code>"
 
         afk_st = is_afk(user.id)
         if afk_st:
@@ -255,7 +255,7 @@ def info(update: Update, context: CallbackContext):
                     text += _stext.format("Admin")
     if user_id not in [bot.id, 777000, 1087968824]:
         userhp = hpmanager(user)
-        text += f"\n\n<b>XP Xalı:</b> <code>{userhp['earnedhp']}/{userhp['totalhp']}</code>\n[<i>{make_bar(int(userhp['percentage']))} </i>{userhp['percentage']}%]"
+        text += f"\n\n<b>Health:</b> <code>{userhp['earnedhp']}/{userhp['totalhp']}</code>\n[<i>{make_bar(int(userhp['percentage']))} </i>{userhp['percentage']}%]"
 
     try:
         spamwtc = sw.get_ban(int(user.id))
@@ -271,26 +271,26 @@ def info(update: Update, context: CallbackContext):
     disaster_level_present = False
 
     if user.id == OWNER_ID:
-        text += "\n\nUserin Seviyyesi: 'Kiçik Çavuş 👮‍♀️'."
+        text += "\n\nThe Disaster level of this person is 'God'."
         disaster_level_present = True
     elif user.id in DEV_USERS:
-        text += "\n\nUserin Seviyyesi: 'Çavuş 👨🏻‍✈️'."
+        text += "\n\nThis user is member of 'Hero Association'."
         disaster_level_present = True
     elif user.id in DRAGONS:
-        text += "\n\nUserin Seviyyesi:'Gizir👨‍✈️'."
+        text += "\n\nThe Disaster level of this person is 'Dragon'."
         disaster_level_present = True
     elif user.id in DEMONS:
-        text += "\n\nUserin Seviyyesi: 'Baş Gizir 👨🏻‍🎤'."
+        text += "\n\nThe Disaster level of this person is 'Demon'."
         disaster_level_present = True
     elif user.id in TIGERS:
-        text += "\n\nUserin Seviyyesi: 'Kiçik Leytenant ⭐️'."
+        text += "\n\nThe Disaster level of this person is 'Tiger'."
         disaster_level_present = True
     elif user.id in WOLVES:
-        text += "\n\nUserin Seviyyesi: 'Baş Leytenant ⭐️⭐️⭐️'."
+        text += "\n\nThe Disaster level of this person is 'Wolf'."
         disaster_level_present = True
 
     if disaster_level_present:
-        text += ' [<a href="https://t.me/XTDOfficial">?</a>]'.format(
+        text += ' [<a href="https://t.me/OnePunchUpdates/155">?</a>]'.format(
             bot.username)
 
     try:
@@ -361,7 +361,7 @@ def about_me(update: Update, context: CallbackContext):
         username = message.reply_to_message.from_user.first_name
         update.effective_message.reply_text(
             f"{username} hasn't set an info message about themselves yet!")
-    else:`
+    else:
         update.effective_message.reply_text(
             "There isnt one, use /setme to set one.")
 
@@ -497,21 +497,18 @@ __help__ = """
 *ID:*
  • `/id`*:* get the current group id. If used by replying to a message, gets that user's id.
  • `/gifid`*:* reply to a gif to me to tell you its file ID.
-
 *Self addded information:* 
  • `/setme <text>`*:* will set your info
  • `/me`*:* will get your or another user's info.
 Examples:
  `/setme I am a wolf.`
  `/me @username(defaults to yours if no user specified)`
-
 *Information others add on you:* 
  • `/bio`*:* will get your or another user's bio. This cannot be set by yourself.
 • `/setbio <text>`*:* while replying, will save another user's bio 
 Examples:
  `/bio @username(defaults to yours if not specified).`
  `/setbio This user is a wolf` (reply to the user)
-
 *Overall Information about you:*
  • `/info`*:* get information about a user. 
  

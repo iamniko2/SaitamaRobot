@@ -231,7 +231,7 @@ def info(update: Update, context: CallbackContext):
             f"AD: {html.escape(user.first_name)}")
 
     if user.last_name:
-        text += f"\nLSoyad: {html.escape(user.last_name)}"
+        text += f"\nSoyad: {html.escape(user.last_name)}"
 
     if user.username:
         text += f"\nUsername: @{html.escape(user.username)}"
@@ -269,30 +269,7 @@ def info(update: Update, context: CallbackContext):
         pass  # don't crash if api is down somehow...
 
     disaster_level_present = False
-
-    if user.id == OWNER_ID:
-        text += "\n\nThe Disaster level of this person is 'God'."
-        disaster_level_present = True
-    elif user.id in DEV_USERS:
-        text += "\n\nThis user is member of 'Hero Association'."
-        disaster_level_present = True
-    elif user.id in DRAGONS:
-        text += "\n\nThe Disaster level of this person is 'Dragon'."
-        disaster_level_present = True
-    elif user.id in DEMONS:
-        text += "\n\nThe Disaster level of this person is 'Demon'."
-        disaster_level_present = True
-    elif user.id in TIGERS:
-        text += "\n\nThe Disaster level of this person is 'Tiger'."
-        disaster_level_present = True
-    elif user.id in WOLVES:
-        text += "\n\nThe Disaster level of this person is 'Wolf'."
-        disaster_level_present = True
-
-    if disaster_level_present:
-        text += ' [<a href="https://t.me/OnePunchUpdates/155">?</a>]'.format(
-            bot.username)
-
+   
     try:
         user_member = chat.get_member(user.id)
         if user_member.status == 'administrator':

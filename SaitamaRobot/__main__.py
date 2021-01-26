@@ -96,7 +96,7 @@ for module_name in ALL_MODULES:
         IMPORTED[imported_module.__mod_name__.lower()] = imported_module
     else:
         raise Exception(
-            "Can't have two modules with the same name! Please change one")
+            "Eyni adda iki modul ola bilməz! Xahiş edirəm birini dəyişdirin")
 
     if hasattr(imported_module, "__help__") and imported_module.__help__:
         HELPABLE[imported_module.__mod_name__.lower()] = imported_module
@@ -140,7 +140,7 @@ def send_help(chat_id, text, keyboard=None):
 def test(update: Update, context: CallbackContext):
     # pprint(eval(str(update)))
     # update.effective_message.reply_text("Hola tester! _I_ *have* `markdown`", parse_mode=ParseMode.MARKDOWN)
-    update.effective_message.reply_text("This person edited a message")
+    update.effective_message.reply_text("Bu şəxs bir mesajı düzəltdi")
     print(update.effective_message)
 
 
@@ -259,7 +259,7 @@ def help_button(update, context):
     try:
         if mod_match:
             module = mod_match.group(1)
-            text = ("Here is the help for the *{}* module:\n".format(
+            text = ("Kömək Budur *{}* module:\n".format(
                 HELPABLE[module].__mod_name__) + HELPABLE[module].__help__)
             query.message.edit_text(
                 text=text,
@@ -445,7 +445,7 @@ def settings_button(update: Update, context: CallbackContext):
         elif excp.message == "Mesaj silinə bilmir":
             pass
         else:
-            LOGGER.exception("Exception in settings buttons. %s",
+            LOGGER.exception("Ayarlar düymələrindəki istisna. %s",
                              str(query.data))
 
 
@@ -487,7 +487,7 @@ def donate(update: Update, context: CallbackContext):
 
         if OWNER_ID != 254318997 and DONATION_LINK:
             update.effective_message.reply_text(
-                "You can also donate to the person currently running me "
+                "Hal-hazırda məni idarə edən şəxsə bağış edə bilərsiniz "
                 "[here]({})".format(DONATION_LINK),
                 parse_mode=ParseMode.MARKDOWN)
 
@@ -500,10 +500,10 @@ def donate(update: Update, context: CallbackContext):
                 disable_web_page_preview=True)
 
             update.effective_message.reply_text(
-                "I've PM'ed you about donating to my creator!")
+                "Yaradanıma bağışlamaq barədə sizə məlumat verdim!")
         except Unauthorized:
             update.effective_message.reply_text(
-                "Contact me in PM first to get donation information.")
+                "Bağış məlumatlarını almaq üçün əvvəlcə mənimlə əlaqə saxlayın.")
 
 
 def migrate_chats(update: Update, context: CallbackContext):
@@ -521,7 +521,7 @@ def migrate_chats(update: Update, context: CallbackContext):
     for mod in MIGRATEABLE:
         mod.__migrate__(old_chat, new_chat)
 
-    LOGGER.info("Successfully migrated!")
+    LOGGER.info("Uğurla köçdüm!")
     raise DispatcherHandlerStop
 
 
@@ -529,7 +529,7 @@ def main():
 
     if SUPPORT_CHAT is not None and isinstance(SUPPORT_CHAT, str):
         try:
-            dispatcher.bot.sendMessage(f"@{SUPPORT_CHAT}", "I am now online!")
+            dispatcher.bot.sendMessage(f"@{SUPPORT_CHAT}", "İndi onlaynam!")
         except Unauthorized:
             LOGGER.warning(
                 "Bot isnt able to send message to support_chat, go and check!")

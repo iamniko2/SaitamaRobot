@@ -363,7 +363,7 @@ def get_chat(chat_id, chat_data):
         return {"status": False, "value": False}
 
 
-__mod_name__ = "Backups"
+
 
 __help__ = """
 *Only for group owner:*
@@ -375,6 +375,8 @@ __help__ = """
 
 """
 
+IMPORT_HANDLER = CommandHandler("import", import_data)
+EXPORT_HANDLER = CommandHandler("export", export_data, pass_chat_data=True)
 
 
 dispatcher.add_handler(IMPORT_HANDLER)

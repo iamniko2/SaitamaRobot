@@ -2110,19 +2110,31 @@ def fed_user_help(update: Update, context: CallbackContext):
         parse_mode=ParseMode.MARKDOWN)
 
 
-__mod_name__ = "Federations"
+__mod_name__ = "Federasiya"
 
 __help__ = """
-Everything is fun, until a spammer starts entering your group, and you have to block it. Then you need to start banning more, and more, and it hurts.
-But then you have many groups, and you don't want this spammer to be in one of your groups - how can you deal? Do you have to manually block it, in all your groups?\n
-*No longer!* With Federation, you can make a ban in one chat overlap with all other chats.\n
-You can even designate federation admins, so your trusted admin can ban all the spammers from chats you want to protect.\n
-
-*Commands:*\n
-Feds are now divided into 3 sections for your ease. 
-• `/fedownerhelp`*:* Provides help for fed creation and owner only commands
-• `/fedadminhelp`*:* Provides help for fed administration commands
-• `/feduserhelp`*:* Provides help for commands anyone can use
+Ah,qrup rəhbərliyi.Qrupunuzda hər şey əyləncəlidir və oyunlar oynuyub söhbət edirsiniz taki spammerlər gələnə qədər.Siz onları qrupdan uzaqlaşdırmalısınız.
+Onlar  sizin bütün qruplarınıza daxil olmağa başlıyır və siz onları ayrı-ayrılıqda hər qrupdan ban etmək məcburiyyətindəsiniz.Tam olaraq burada sizin köməyinizə federasiyalar çatır.Sizin bütün qruplarınız eyni federasiyaya bağlı olarsa bir fedban ilə eyni insanı bütün qruplarınızdan ban edə bilərsiniz.Üstəlik güvəndiyiniz istifadəçiləri federasiyada admin edərək siz olmadığınız zaman onların da fedban vermək özəlliyini aktiv edə bilərsiniz.
+Qrup idarəetməni olduqca səmərəli hala gətirir.
+Komandalar:
+ -/newfed <fedname>:Uyğun bir ad seçərək yeni bir federasiya yaradın.Bir hesabla sadəcə 1 federasiyaya sahib olmağa icazə var.Bu komanda həmçinin federasiyanın adının dəyişilməsi üçün də istifadə edilə bilər.(maks.64 xarakter)
+ - /delfed: Federasiyani silmək üçün istifadə olunan komandadır.Federasiyaya bağlı məlumatlar da federasiyayla birlikdə silinəcək.
+ - /fedinfo <FedID>:Seçilmiş federasiya haqqında məlumat 
+ - /joinfed <FedID>:Federasiyanı əlavə etmək istədiyiniz qrupda bu komandadan istifadə edin.Hər qrup sadəcə 1 federasiyaya bağlı ola bilər 
+ - /leavefed <FedID>mövcud olan federasiyadan ayrılmaq üçün istifadə olunan komandadır.Sadəcə qrup sahibi bu komandadan istifadə edə bilər
+ - /fpromote <user>:Federasiya sahibi bu komanda ilə hər hansı bir istifadəçini federasiyada admin edə bilər
+ - /fdemote <user>:Federasiya sahibi bu komanda ilə federasiya adminin yetkisini əlindən ala bilər
+ - /fban <user>:Bu komanda ilə istifadəçini federasiyanın olduğu bütün qruplardan ban edə bilərsən.Federasiya adminləri və sahibi bu komandadan istifadə edə bilir
+ - /unfban <user>:Federasiyadan ban olunmuş istifadəçini bağışlamaq üçün istifadə olunan komandadır
+ - /setfrules: federasiyanın qaydalarını qeyd etmək üçün komandadır
+ - /frules: federasiyanın qaydalarını görmək üçün komandadır
+ - /chatfed:Federasiyaya bağlı olan qrupları göstərmək üçün komandadır(Əmin deyiləm özündə bax)
+ - /fedadmins:federasiyanın adminlərinin siyahısını görmək üçün komandadır
+ - /fbanlist:federasiyadan ban olunmuş istifadəçilərin siyahısını görmək üçün komandadır
+ - /fedchats: Federasiyaya bağlı olan qrupların siyahısını görmək üçün komandadır
+ - /importfbans: federasiyanı import etmək
+ - /myfeds:federasiyanızı öyrənmək üçün komandadır
+ - /fbrodcast federasiyada olan qruplara bildiriş gedir.
 
 """
 

@@ -136,15 +136,11 @@ def list_chatbot_chats(update: Update, context: CallbackContext):
 
 
 __help__ = f"""
-Chatbot utilizes the CoffeeHouse API and allows Saitama to talk and provides a more interactive group chat experience.
+ChatBot aktiv edildikdə bot ilə ünsiyyət qurmaq olur
 
-*Commands:* 
-*Admins only:*
- • `/addchat`*:* Enables Chatbot mode in the chat.
- • `/rmchat`*:* Disables Chatbot mode in the chat.
-
-Reports bugs at @{SUPPORT_CHAT}
-*Powered by CoffeeHouse* (https://coffeehouse.intellivoid.net/) from @Intellivoid
+Sadəcə adminlər:
+ • /addchat: Qrupda Chatbot aktiv edir.
+ • /rmchat: Qrupdakı Chatbot deaktiv edir.
 """
 
 ADD_CHAT_HANDLER = CommandHandler("addchat", add_chat)

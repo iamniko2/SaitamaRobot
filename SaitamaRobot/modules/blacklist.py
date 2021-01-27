@@ -451,21 +451,20 @@ def __stats__():
         sql.num_blacklist_filters(), sql.num_blacklist_filter_chats())
 
 
-__mod_name__ = "Blacklists"
+__mod_name__ = "Qara Siyahı"
 
 __help__ = """
 
-Blacklists are used to stop certain triggers from being said in a group. Any time the trigger is mentioned, the message will immediately be deleted. A good combo is sometimes to pair this up with warn filters!
+Qara siyahılar müəyyən tetikleyicilerin bir qrupda söylənməsini dayandırmaq üçün istifadə olunur. Tetikleyici qeyd edildiyi zaman mesaj dərhal silinəcəkdir. Bəzən bunu xəbərdarlıq filtrləri ilə birləşdirmək üçün yaxşı bir kombo!
 
-*NOTE*: Blacklists do not affect group admins.
+DİQQƏT: Qara siyahılar qrup adminlərini təsir etmir.
 
- • `/blacklist`*:* View the current blacklisted words.
+  •/ qara siyahı: Cari qara siyahıya alınan sözlərə baxın.
 
-Admin only:
- • `/addblacklist <triggers>`*:* Add a trigger to the blacklist. Each line is considered one trigger, so using different lines will allow you to add multiple triggers.
- • `/unblacklist <triggers>`*:* Remove triggers from the blacklist. Same newline logic applies here, so you can remove multiple triggers at once.
- • `/blacklistmode <off/del/warn/ban/kick/mute/tban/tmute>`*:* Action to perform when someone sends blacklisted words.
-
+Yalnız admin:
+  •/ addblacklist <triggers>: Qara siyahıya bir trigger əlavə edin. Hər sətir bir tetikleyici sayılır, buna görə fərqli sətirlərdən istifadə etmək çox tətik əlavə etməyə imkan verəcəkdir.
+  •/ unblacklist <triggers>: tetikleyicileri qara siyahıdan silin. Eyni yeni satır məntiqi burada tətbiq olunur, beləliklə birdən çox tətiyi silə bilərsiniz.
+  •/ blacklistmode <off /del /warn /ban /kick /mute /tban /tmute>: Kimsə qara siyahıya kəlmələr göndərdikdə yerinə yetiriləcək hərəkət.
 """
 BLACKLIST_HANDLER = DisableAbleCommandHandler(
     "blacklist", blacklist, pass_args=True, admin_ok=True)

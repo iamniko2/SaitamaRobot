@@ -202,7 +202,7 @@ def start(update: Update, context: CallbackContext):
                              url=f"https://t.me/najafov_official"),
                          InlineKeyboardButton(
                              text="🔔Yeniliklərlə Bağlı Kanalımız",
-                             url="https://t.me/NezaretciAzNews")
+                             url="https://t.me/XTDBotFather")
                      ],
                      [
                          InlineKeyboardButton(

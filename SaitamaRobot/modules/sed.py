@@ -123,7 +123,7 @@ Bu simvollardan istifadə etmək istəyirsinizsə, onlardan qaçdığınızdan �
 Misal: \ ?.
 """.format(telegram.MAX_MESSAGE_LENGTH)
 
-__mod_name__ = "Sed"
+__mod_name__ = "Sed/Regex"
 
 SED_HANDLER = DisableAbleMessageHandler(
     Filters.regex(r's([{}]).*?\1.*'.format("".join(DELIMITERS))),

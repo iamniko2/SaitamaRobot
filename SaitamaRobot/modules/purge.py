@@ -15,17 +15,17 @@ async def purge_messages(event):
             user_id=event.sender_id, message=event) and event.from_id not in [
                 1087968824
             ]:
-        await event.reply("Only Admins are allowed to use this command")
+        await event.reply("Bu əmrdən yalnız Adminlərin istifadəsinə icazə verilir")
         return
 
     if not await can_delete_messages(message=event):
-        await event.reply("Can't seem to purge the message")
+        await event.reply("Mesajı təmizləmək görünmür")
         return
 
     reply_msg = await event.get_reply_message()
     if not reply_msg:
         await event.reply(
-            "Reply to a message to select where to start purging from.")
+            "Təmizləməyə haradan başlayacağınızı seçmək üçün mesajı cavablandırın.")
         return
     messages = []
     message_id = reply_msg.id
@@ -43,7 +43,7 @@ async def purge_messages(event):
     except:
         pass
     time_ = time.perf_counter() - start
-    text = f"Purged Successfully in {time_:0.2f} Second(s)"
+    text = f"Müvəffəqiyyətlə təmizləndi  {time_:0.2f} Second(s)"
     await event.respond(text, parse_mode='markdown')
 
 
@@ -55,16 +55,16 @@ async def delete_messages(event):
             user_id=event.sender_id, message=event) and event.from_id not in [
                 1087968824
             ]:
-        await event.reply("Only Admins are allowed to use this command")
+        await event.reply("Bu əmrdən yalnız Adminlərin istifadəsinə icazə verilir")
         return
 
     if not await can_delete_messages(message=event):
-        await event.reply("Can't seem to delete this?")
+        await event.reply("Bunu silmək isdiyirsən?")
         return
 
     message = await event.get_reply_message()
     if not message:
-        await event.reply("Whadya want to delete?")
+        await event.reply("Whadya silmək istəyirsən?")
         return
     chat = await event.get_input_chat()
     del_message = [message, event.message]
@@ -73,9 +73,9 @@ async def delete_messages(event):
 
 __help__ = """
 *Admin only:*
- - /del: deletes the message you replied to
- - /purge: deletes all messages between this and the replied to message.
- - /purge <integer X>: deletes the replied message, and X messages following it if replied to a message.
+ - /del: cavab verdiyiniz mesajı silir
+ - /purge: bununla mesajın cavablandırılması arasındakı bütün mesajları silir.
+ - /purge <integer X>: cavab verilmiş mesajı və bir mesaja cavab verildiyi təqdirdə onu izləyən X mesajlarını silir. 
 """
 
 PURGE_HANDLER = purge_messages, events.NewMessage(pattern="^[!/]purge$")
@@ -84,6 +84,6 @@ DEL_HANDLER = delete_messages, events.NewMessage(pattern="^[!/]del$")
 telethn.add_event_handler(*PURGE_HANDLER)
 telethn.add_event_handler(*DEL_HANDLER)
 
-__mod_name__ = "Purges"
+__mod_name__ = "Purges/Mesaj Silmək"
 __command_list__ = ["del", "purge"]
 __handlers__ = [PURGE_HANDLER, DEL_HANDLER]

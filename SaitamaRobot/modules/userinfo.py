@@ -471,26 +471,24 @@ def __user_info__(user_id):
 
 
 __help__ = """
-*ID:*
- • `/id`*:* get the current group id. If used by replying to a message, gets that user's id.
- • `/gifid`*:* reply to a gif to me to tell you its file ID.
-*Self addded information:* 
- • `/setme <text>`*:* will set your info
- • `/me`*:* will get your or another user's info.
-Examples:
- `/setme I am a wolf.`
- `/me @username(defaults to yours if no user specified)`
-*Information others add on you:* 
- • `/bio`*:* will get your or another user's bio. This cannot be set by yourself.
-• `/setbio <text>`*:* while replying, will save another user's bio 
-Examples:
- `/bio @username(defaults to yours if not specified).`
- `/setbio This user is a wolf` (reply to the user)
-*Overall Information about you:*
- • `/info`*:* get information about a user. 
+ID:
+  • /id: cari qrup kimliyini əldə edin. Bir mesajı cavablandırmaqla istifadə edilərsə, istifadəçinin kimliyini alır.
+  • /gifid: mənə bir gif-ə sənəd kimliyini söyləmək üçün cavab verin.
+Özünə əlavə edilmiş məlumat:
+  • /setme <text>: məlumatınızı quracaq
+  • /me: sizin və ya başqa bir istifadəçinin məlumatını alacaq.
+Nümunələr:
+  /setme Mən canavaram.
+  /me @ istifadəçi adı (istifadəçi göstərmədiyi təqdirdə sizin üçün borcludur)
+Başqalarının sizə əlavə etdiyi məlumatlar:
+  • /bio: sizin və ya başqa bir istifadəçinin biosunu əldə edəcəkdir. Bunu özünüz təyin edə bilməzsiniz.
+• /setbio <text>: cavab verərkən başqa bir istifadəçinin biosunu qurtaracaqdır
+Nümunələr:
+  /bio @ istifadəçi adı (göstərilməyibsə sizin üçün borcludur).
+  /setbio Bu istifadəçi bir qurddur (istifadəçiyə cavab)
+Sizin haqqınızda ümumi məlumat:
+  • /info istifadəçi haqqında məlumat əldə edin.
  
-*What is that health thingy?*
- Come and see [HP System explained](https://t.me/OnePunchUpdates/192)
 """
 
 SET_BIO_HANDLER = DisableAbleCommandHandler("setbio", set_about_bio)

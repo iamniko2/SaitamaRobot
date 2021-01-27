@@ -424,10 +424,10 @@ def makepack_internal(
 
 
 __help__ = """
-• `/stickerid`*:* reply to a sticker to me to tell you its file ID.
-• `/getsticker`*:* reply to a sticker to me to upload its raw PNG file.
-• `/kang`*:* reply to a sticker to add it to your pack.
-• `/stickers`*:* Find stickers for given term on combot sticker catalogue
+• /stickerid: mənə bir sənədə sənədini söyləmək üçün bir stikeri cavablandır.
+• /getsticker:  PNG sənədini yükləmək üçün mənə bir etiketə cavab verin.
+• /kang: paketinizə əlavə etmək üçün bir stikeri cavablandırın.
+• /stickers: Kombinə stikerlər kataloqunda verilmiş müddət üçün etiketləri tapın
 """
 
 __mod_name__ = "Stickers"

@@ -967,7 +967,6 @@ WELC_MUTE_HELP_TXT = (
 - /welcomemute strong: qrupa yeni qatılan mən robot deyiləm düyməsini sıxmayana qədər qrupda danışa bilməz
 - /welcomemute off: welcomemute deaktiv etmək.
 Not: Ciddi Xoş gəldin modulun qoşsanəz 160 saniyə vaxları olacaq robot olmadıqlarını təsdiq etmək üçün.
-)
 
 
 @run_async

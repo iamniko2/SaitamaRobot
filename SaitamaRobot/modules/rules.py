@@ -107,7 +107,7 @@ def __chat_settings__(chat_id, user_id):
 
 
 __help__ = """
-• /qaydalar: bu söhbət üçün qaydaları əldə edin.
+• /rules: bu söhbət üçün qaydaları əldə edin.
 
 Yalnız adminler:
   • /setrules <qaydalarınız burada> bu söhbət üçün qaydaları təyin edin

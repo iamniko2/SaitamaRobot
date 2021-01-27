@@ -962,11 +962,13 @@ WELC_HELP_TXT = (
     "replying to the desired media, and calling `/setwelcome`.")
 
 WELC_MUTE_HELP_TXT = (
-. Yardım almaq üçün aşağıdakıları oxuyun:
-- /welcomemute soft: qrupa yeni qatılan istifadəçilər 24 saat ərzində media göndərə bilməz.
-- /welcomemute strong: qrupa yeni qatılan mən robot deyiləm düyməsini sıxmayana qədər qrupda danışa bilməz
-- /welcomemute off: welcomemute deaktiv etmək.
-Not: Ciddi Xoş gəldin modulun qoşsanəz 160 saniyə vaxları olacaq robot olmadıqlarını təsdiq etmək üçün.
+    "You can get the bot to mute new people who join your group and hence prevent spambots from flooding your group. "
+    "The following options are possible:\n"
+    "• `/welcomemute soft`*:* restricts new members from sending media for 24 hours.\n"
+    "• `/welcomemute strong`*:* mutes new members till they tap on a button thereby verifying they're human.\n"
+    "• `/welcomemute off`*:* turns off welcomemute.\n"
+    "*Note:* Strong mode kicks a user from the chat if they dont verify in 120seconds. They can always rejoin though"
+)
 
 
 @run_async

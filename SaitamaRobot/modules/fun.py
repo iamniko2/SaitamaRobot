@@ -243,20 +243,20 @@ def weebify(update: Update, context: CallbackContext):
 
 
 __help__ = """
- • `/runs`*:* reply a random string from an array of replies
- • `/slap`*:* slap a user, or get slapped if not a reply
- • `/shrug`*:* get shrug XD
- • `/table`*:* get flip/unflip :v
- • `/decide`*:* Randomly answers yes/no/maybe
- • `/toss`*:* Tosses A coin
- • `/bluetext`*:* check urself :V
- • `/roll`*:* Roll a dice
- • `/rlg`*:* Join ears,nose,mouth and create an emo ;-;
- • `/shout <keyword>`*:* write anything you want to give loud shout
- • `/weebify <text>`*:* returns a weebified text
- • `/sanitize`*:* always use this before /pat or any contact
- • `/pat`*:* pats a user, or get patted
- • `/8ball`*:* predicts using 8ball method 
+ • `/runs`*:* bir sıra cavablardan təsadüfi bir simli cavablandırın
+ • `/slap`*:* bir istifadəçiyə yumruq vurun və ya cavab deyilsə tokatlanın
+ • `/shrug`*:* XD çiyinlərini çəkmək
+ • `/table`*:* çevir / geri çevir 
+ • `/decide`*:* Təsadüfi olaraq he / yox / bəlkə cavab verir
+ • `/toss`*:* Bir sikkə atır
+ • `/bluetext`*:*  özünüzü yoxlayın 
+ • `/roll`*:* Bir zar atın
+ • `/rlg`*:* Qulaqları, burnu, ağzı birləşdirin və bir emo yaradın
+ • `/shout <söz>`*:* yüksək səs vermək istədiyiniz hər şeyi yazın
+ • `/weebify <text>`*:* weebify mətni qaytarır
+ • `/sanitize`*:*  həmişə bunu / patlamadan və ya hər hansı bir təmasdan əvvəl istifadə edin
+ • `/pat`*:* bir istifadəçini ovuşdurur və ya şəfqət alır
+ • `/8ball`*:* 8ball metodundan istifadə edərək proqnoz verir 
 """
 
 SANITIZE_HANDLER = DisableAbleCommandHandler("sanitize", sanitize)
@@ -289,7 +289,7 @@ dispatcher.add_handler(DECIDE_HANDLER)
 dispatcher.add_handler(EIGHTBALL_HANDLER)
 dispatcher.add_handler(TABLE_HANDLER)
 
-__mod_name__ = "Fun"
+__mod_name__ = "Xüsusi Modullar"
 __command_list__ = [
     "runs", "slap", "roll", "toss", "shrug", "bluetext", "rlg", "decide",
     "table", "pat", "sanitize", "shout", "weebify", "8ball"

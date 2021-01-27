@@ -30,7 +30,7 @@ def add_chat(update: Update, context: CallbackContext):
     user = update.effective_user
     is_chat = sql.is_chat(chat.id)
     if chat.type == "private":
-        msg.reply_text("You can't enable AI in PM.")
+        msg.reply_text("PM-də AI-i aktiv edə bilməzsiniz.")
         return
 
     if not is_chat:
@@ -38,7 +38,7 @@ def add_chat(update: Update, context: CallbackContext):
         ses_id = str(ses.id)
         expires = str(ses.expires)
         sql.set_ses(chat.id, ses_id, expires)
-        msg.reply_text("AI successfully enabled for this chat!")
+        msg.reply_text("AI bu söhbət üçün uğurla aktiv edildi!)
         message = (
             f"<b>{html.escape(chat.title)}:</b>\n"
             f"#AI_ENABLED\n"
@@ -46,7 +46,7 @@ def add_chat(update: Update, context: CallbackContext):
         )
         return message
     else:
-        msg.reply_text("AI is already enabled for this chat!")
+        msg.reply_text("AI bu söhbət üçün artıq aktivdir!")
         return ""
 
 
@@ -59,11 +59,11 @@ def remove_chat(update: Update, context: CallbackContext):
     user = update.effective_user
     is_chat = sql.is_chat(chat.id)
     if not is_chat:
-        msg.reply_text("AI isn't enabled here in the first place!")
+        msg.reply_text("Burada ilk növbədə AI effektiv deyil!")
         return ""
     else:
         sql.rem_chat(chat.id)
-        msg.reply_text("AI disabled successfully!")
+        msg.reply_text("AI uğurla əlil oldu!")
         message = (
             f"<b>{html.escape(chat.title)}:</b>\n"
             f"#AI_DISABLED\n"

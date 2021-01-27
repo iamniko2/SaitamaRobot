@@ -19,24 +19,24 @@ from telegram.utils.helpers import mention_html
 
 def check_user(user_id: int, bot: Bot, chat: Chat) -> Optional[str]:
     if not user_id:
-        reply = "Deyəsən bir istifadəçiyə istinad etmirsiniz və ya göstərilən id səhvdir .."
+        reply = "You don't seem to be referring to a user or the ID specified is incorrect.."
         return reply
 
     try:
         member = chat.get_member(user_id)
     except BadRequest as excp:
         if excp.message == "User not found":
-            reply = "Görünür bu istifadəçini tapa bilmirəm"
+            reply = "I can't seem to find this user"
             return reply
         else:
             raise
 
     if user_id == bot.id:
-        reply = "Özümü susdurmayacağam, nə qədər yüksəksən?"
+        reply = "I'm not gonna MUTE myself, How high are you?"
         return reply
 
     if is_user_admin(chat, user_id, member) or user_id in TIGERS:
-        reply = "Bilmirəm. Səssizləşdirmək üçün başqasını tap, amma bu deyil."
+        reply = "Can't. Find someone else to mute but not this one."
         return reply
 
     return None
@@ -68,22 +68,22 @@ def mute(update: Update, context: CallbackContext) -> str:
         f"<b>{html.escape(chat.title)}:</b>\n"
         f"#MUTE\n"
         f"<b>Admin:</b> {mention_html(user.id, user.first_name)}\n"
-        f"<b>İstifadəçi:</b> {mention_html(member.user.id, member.user.first_name)}")
+        f"<b>User:</b> {mention_html(member.user.id, member.user.first_name)}")
 
     if reason:
-        log += f"\n<b>Səbəb:</b> {reason}"
+        log += f"\n<b>Reason:</b> {reason}"
 
     if member.can_send_messages is None or member.can_send_messages:
         chat_permissions = ChatPermissions(can_send_messages=False)
         bot.restrict_chat_member(chat.id, user_id, chat_permissions)
         bot.sendMessage(
             chat.id,
-            f"Səssizdir <b>{html.escape(member.user.first_name)}</b> son istifadə tarixi yoxdur!",
+            f"Muted <b>{html.escape(member.user.first_name)}</b> with no expiration date!",
             parse_mode=ParseMode.HTML)
         return log
 
     else:
-        message.reply_text("Bu istifadəçi artıq səssizdir!")
+        message.reply_text("This user is already muted!")
 
     return ""
 
@@ -102,7 +102,7 @@ def unmute(update: Update, context: CallbackContext) -> str:
     user_id = extract_user(message, args)
     if not user_id:
         message.reply_text(
-            "Səsini açmaq üçün ya mənə bir istifadəçi adı verməlisən, ya da səsi çıxartmaq üçün birinə cavab verməlisən."
+            "You'll need to either give me a username to unmute, or reply to someone to be unmuted."
         )
         return ""
 
@@ -130,18 +130,18 @@ def unmute(update: Update, context: CallbackContext) -> str:
                 pass
             bot.sendMessage(
                 chat.id,
-                f"İcazə verərəm <b>{html.escape(member.user.first_name)}</b> to text!",
+                f"I shall allow <b>{html.escape(member.user.first_name)}</b> to text!",
                 parse_mode=ParseMode.HTML)
             return (
                 f"<b>{html.escape(chat.title)}:</b>\n"
                 f"#UNMUTE\n"
                 f"<b>Admin:</b> {mention_html(user.id, user.first_name)}\n"
-                f"<b>İstifadəçi:</b> {mention_html(member.user.id, member.user.first_name)}"
+                f"<b>User:</b> {mention_html(member.user.id, member.user.first_name)}"
             )
     else:
         message.reply_text(
-            "Bu istifadəçi söhbətdə belə deyil, səssizləşdirmək onları özlərindən çox danışmağa məcbur etməyəcəkdir "
-            "Bu inzibati!")
+            "This user isn't even in the chat, unmuting them won't make them talk more than they "
+            "already do!")
 
     return ""
 
@@ -169,7 +169,7 @@ def temp_mute(update: Update, context: CallbackContext) -> str:
 
     if not reason:
         message.reply_text(
-            "Bu istifadəçinin səssizləşdirilməsi üçün vaxt təyin etməmisiniz!")
+            "You haven't specified a time to mute this user for!")
         return ""
 
     split_reason = reason.split(None, 1)
@@ -189,10 +189,10 @@ def temp_mute(update: Update, context: CallbackContext) -> str:
         f"<b>{html.escape(chat.title)}:</b>\n"
         f"#TEMP MUTED\n"
         f"<b>Admin:</b> {mention_html(user.id, user.first_name)}\n"
-        f"<b>İstifadəçi:</b> {mention_html(member.user.id, member.user.first_name)}\n"
-        f"<b>Vaxt:</b> {time_val}")
+        f"<b>User:</b> {mention_html(member.user.id, member.user.first_name)}\n"
+        f"<b>Time:</b> {time_val}")
     if reason:
-        log += f"\n<b>Səbəb:</b> {reason}"
+        log += f"\n<b>Reason:</b> {reason}"
 
     try:
         if member.can_send_messages is None or member.can_send_messages:
@@ -205,10 +205,10 @@ def temp_mute(update: Update, context: CallbackContext) -> str:
                 parse_mode=ParseMode.HTML)
             return log
         else:
-            message.reply_text("Bu istifadəçi artıq səssizdir.")
+            message.reply_text("This user is already muted.")
 
     except BadRequest as excp:
-        if excp.message == "Cavab mesajı tapılmadı":
+        if excp.message == "Reply message not found":
             # Do not reply
             message.reply_text(f"Muted for {time_val}!", quote=False)
             return log
@@ -216,7 +216,7 @@ def temp_mute(update: Update, context: CallbackContext) -> str:
             LOGGER.warning(update)
             LOGGER.exception("ERROR muting user %s in chat %s (%s) due to %s",
                              user_id, chat.title, chat.id, excp.message)
-            message.reply_text("Lanet olsun, o istifadəçinin səsini çıxara bilmirəm.")
+            message.reply_text("Well damn, I can't mute that user.")
 
     return ""
 

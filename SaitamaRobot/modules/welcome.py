@@ -962,12 +962,11 @@ WELC_HELP_TXT = (
     "replying to the desired media, and calling `/setwelcome`.")
 
 WELC_MUTE_HELP_TXT = (
-    "You can get the bot to mute new people who join your group and hence prevent spambots from flooding your group. "
-    "The following options are possible:\n"
-    "• `/welcomemute soft`*:* restricts new members from sending media for 24 hours.\n"
-    "• `/welcomemute strong`*:* mutes new members till they tap on a button thereby verifying they're human.\n"
-    "• `/welcomemute off`*:* turns off welcomemute.\n"
-    "*Note:* Strong mode kicks a user from the chat if they dont verify in 120seconds. They can always rejoin though"
+. Yardım almaq üçün aşağıdakıları oxuyun:
+- /welcomemute soft: qrupa yeni qatılan istifadəçilər 24 saat ərzində media göndərə bilməz.
+- /welcomemute strong: qrupa yeni qatılan mən robot deyiləm düyməsini sıxmayana qədər qrupda danışa bilməz
+- /welcomemute off: welcomemute deaktiv etmək.
+Not: Ciddi Xoş gəldin modulun qoşsanəz 160 saniyə vaxları olacaq robot olmadıqlarını təsdiq etmək üçün.
 )
 
 
@@ -1010,22 +1009,17 @@ def __chat_settings__(chat_id, user_id):
 
 
 __help__ = """
-*Admins only:*
- • `/welcome <on/off>`*:* enable/disable welcome messages.
- • `/welcome`*:* shows current welcome settings.
- • `/welcome noformat`*:* shows current welcome settings, without the formatting - useful to recycle your welcome messages!
- • `/goodbye`*:* same usage and args as `/welcome`.
- • `/setwelcome <sometext>`*:* set a custom welcome message. If used replying to media, uses that media.
- • `/setgoodbye <sometext>`*:* set a custom goodbye message. If used replying to media, uses that media.
- • `/resetwelcome`*:* reset to the default welcome message.
- • `/resetgoodbye`*:* reset to the default goodbye message.
- • `/cleanwelcome <on/off>`*:* On new member, try to delete the previous welcome message to avoid spamming the chat.
- • `/welcomemutehelp`*:* gives information about welcome mutes.
- • `/cleanservice <on/off`*:* deletes telegrams welcome/left service messages. 
- *Example:*
-user joined chat, user left chat.
-*Welcome markdown:* 
- • `/welcomehelp`*:* view more formatting information for custom welcome/goodbye messages.
+Admin only:
+ - /welcome <on/off>: xoş gəldin mesajın aktiv etmək və ya deaktiv etmək.
+ - /welcome: hal hazırda olan xoş gəldin mesajı.
+ - /goodbye -> hal hazırda olan xoş getdin mesajı.
+ - /setwelcome <söz>: Qrupa yeni xoş gəldin mesajı ayarlamaq
+ - /setgoodbye <söz>: Qrupa yeni xoş getdin mesajı ayarlamaq
+ - /resetwelcome: xoş gəldin mesajın sıfırlamaq
+ - /resetgoodbye: xoş getdin mesajın sıfırlamaq.
+ - /cleanwelcome <on/off>: qrupa yeni qoşulanlar haqqında bildirişi aktiv və ya deaktiv emək.
+ - /welcomemutehelp: welcome mute haqqında məlumaq.
+ - /welcomehelp: Xoş gəldin mesajları haqqında məlumat.
 """
 
 NEW_MEM_HANDLER = MessageHandler(Filters.status_update.new_chat_members,
@@ -1065,7 +1059,7 @@ dispatcher.add_handler(CLEAN_SERVICE_HANDLER)
 dispatcher.add_handler(BUTTON_VERIFY_HANDLER)
 dispatcher.add_handler(WELCOME_MUTE_HELP)
 
-__mod_name__ = "Greetings"
+__mod_name__ = "Xoş Gəldin Mesajı"
 __command_list__ = []
 __handlers__ = [
     NEW_MEM_HANDLER,

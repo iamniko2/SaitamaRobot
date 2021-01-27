@@ -460,20 +460,19 @@ def __chat_settings__(chat_id, user_id):
 
 
 __help__ = """
- • `/warns <userhandle>`*:* get a user's number, and reason, of warns.
- • `/warnlist`*:* list of all current warning filters
+• /warn<userhandle>: istifadəçinin nömrəsini və səbəbini xəbərdar edir.
+  • /warnlist bütün mövcud xəbərdarlıq filtrlərinin siyahısı
 
-*Admins only:*
- • `/warn <userhandle>`*:* warn a user. After 3 warns, the user will be banned from the group. Can also be used as a reply.
- • `/resetwarn <userhandle>`*:* reset the warns for a user. Can also be used as a reply.
- • `/addwarn <keyword> <reply message>`*:* set a warning filter on a certain keyword. If you want your keyword to \
-be a sentence, encompass it with quotes, as such: `/addwarn "very angry" This is an angry user`. 
- • `/nowarn <keyword>`*:* stop a warning filter
- • `/warnlimit <num>`*:* set the warning limit
- • `/strongwarn <on/yes/off/no>`*:* If set to on, exceeding the warn limit will result in a ban. Else, will just punch.
+Yalnız administratorlar:
+  • /warn<userhandle>: istifadəçini xəbərdar et. 3 xəbərdarlıqdan sonra istifadəçi qrupa qadağan olunacaq. Cavab olaraq da istifadə edilə bilər.
+  • /resetwarn<userhandle>: istifadəçi üçün xəbərdarlıqları yenidən qurun. Cavab olaraq da istifadə edilə bilər.
+  • /addwarn<açar söz> <cavab mesajı>: müəyyən bir açar sözdə xəbərdarlıq filtri qurun. Açar sözünüzün bir cümlə olmasını istəyirsinizsə, onu sitatlarla əhatə edin: / addwarn "çox qəzəbli" Bu hirsli bir istifadəçidir.
+  • /nowarn<açar söz>: xəbərdarlıq filtrini dayandırın
+  • /warnlimit<num>: xəbərdarlıq limitini təyin edin
+  • /strongwarn<on / yes / off / no>: Açılsa, xəbərdarlıq həddini aşmaq qadağa ilə nəticələnəcəkdir. Başqa, yalnız yumruq edəcək.
 """
 
-__mod_name__ = "Warnings"
+__mod_name__ = "Xəbərdarlıqlar"
 
 WARN_HANDLER = CommandHandler("warn", warn_user, filters=Filters.group)
 RESET_WARN_HANDLER = CommandHandler(["resetwarn", "resetwarns"],

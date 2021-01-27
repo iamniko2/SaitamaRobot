@@ -28,16 +28,16 @@ def report_setting(update: Update, context: CallbackContext):
             if args[0] in ("yes", "on"):
                 sql.set_user_setting(chat.id, True)
                 msg.reply_text(
-                    "Turned on reporting! You'll be notified whenever anyone reports something."
+                    "Hesabat verməyə başladı! Hər kəs bir şey barədə məlumat verəndə xəbərdar olacaqsınız."
                 )
 
             elif args[0] in ("no", "off"):
                 sql.set_user_setting(chat.id, False)
                 msg.reply_text(
-                    "Turned off reporting! You wont get any reports.")
+                    "Hesabat vermə söndürüldü! Heç bir hesabat almayacaqsınız.")
         else:
             msg.reply_text(
-                f"Your current report preference is: `{sql.user_should_report(chat.id)}`",
+                f"Hazırkı hesabat seçiminiz: `{sql.user_should_report(chat.id)}`",
                 parse_mode=ParseMode.MARKDOWN)
 
     else:
@@ -45,17 +45,17 @@ def report_setting(update: Update, context: CallbackContext):
             if args[0] in ("yes", "on"):
                 sql.set_chat_setting(chat.id, True)
                 msg.reply_text(
-                    "Turned on reporting! Admins who have turned on reports will be notified when /report "
-                    "or @admin is called.")
+                    "Hesabat verməyə başladı! Hesabatları açan rəhbərlərə nə vaxt / hesabat verildiyi bildirilir"
+                    "və ya @admin adlanır.")
 
             elif args[0] in ("no", "off"):
                 sql.set_chat_setting(chat.id, False)
                 msg.reply_text(
-                    "Turned off reporting! No admins will be notified on /report or @admin."
+                    "Hesabat vermə söndürüldü! Heç bir administrator /report və ya @admin barədə xəbərdar edilməyəcəkdir."
                 )
         else:
             msg.reply_text(
-                f"This group's current setting is: `{sql.chat_should_report(chat.id)}`",
+                f"Bu qrupun cari ayarı: `{sql.chat_should_report(chat.id)}`",
                 parse_mode=ParseMode.MARKDOWN)
 
 
@@ -76,42 +76,42 @@ def report(update: Update, context: CallbackContext) -> str:
         message = update.effective_message
 
         if not args:
-            message.reply_text("Add a reason for reporting first.")
+            message.reply_text("Əvvəlcə hesabat vermək üçün bir səbəb əlavə edin.")
             return ""
 
         if user.id == reported_user.id:
-            message.reply_text("Uh yeah, Sure sure...maso much?")
+            message.reply_text("Bəli, şübhəsiz ki, çox şey?")
             return ""
 
         if user.id == bot.id:
-            message.reply_text("Nice try.")
+            message.reply_text("Gözəl cəhd.")
             return ""
 
         if reported_user.id in REPORT_IMMUNE_USERS:
-            message.reply_text("Uh? You reporting a disaster?")
+            message.reply_text("Hə? Fəlakət barədə məlumat verirsiniz?")
             return ""
 
         if chat.username and chat.type == Chat.SUPERGROUP:
 
-            reported = f"{mention_html(user.id, user.first_name)} reported {mention_html(reported_user.id, reported_user.first_name)} to the admins!"
+            reported = f"{mention_html(user.id, user.first_name)} bildirildi {mention_html(reported_user.id, reported_user.first_name)} adminlərə!"
 
             msg = (
-                f"<b>⚠️ Report: </b>{html.escape(chat.title)}\n"
-                f"<b> • Report by:</b> {mention_html(user.id, user.first_name)}(<code>{user.id}</code>)\n"
-                f"<b> • Reported user:</b> {mention_html(reported_user.id, reported_user.first_name)} (<code>{reported_user.id}</code>)\n"
+                f"<b>⚠️ Hesabat: </b>{html.escape(chat.title)}\n"
+                f"<b> • Hesabat:</b> {mention_html(user.id, user.first_name)}(<code>{user.id}</code>)\n"
+                f"<b> • İstifadəçi bildirildi:</b> {mention_html(reported_user.id, reported_user.first_name)} (<code>{reported_user.id}</code>)\n"
             )
-            link = f'<b> • Reported message:</b> <a href="https://t.me/{chat.username}/{message.reply_to_message.message_id}">click here</a>'
+            link = f'<b> • Bildirilən mesaj:</b> <a href="https://t.me/{chat.username}/{message.reply_to_message.message_id}">click here</a>'
             should_forward = False
             keyboard = [
                 [
                     InlineKeyboardButton(
-                        u"➡ Message",
+                        u"➡ Mesaj",
                         url=f"https://t.me/{chat.username}/{message.reply_to_message.message_id}"
                     )
                 ],
                 [
                     InlineKeyboardButton(
-                        u"⚠ Kick",
+                        u"⚠ At",
                         callback_data=f"report_{chat.id}=kick={reported_user.id}={reported_user.first_name}"
                     ),
                     InlineKeyboardButton(
@@ -121,17 +121,17 @@ def report(update: Update, context: CallbackContext) -> str:
                 ],
                 [
                     InlineKeyboardButton(
-                        u"❎ Delete Message",
+                        u"❎ Mesajı silin",
                         callback_data=f"report_{chat.id}=delete={reported_user.id}={message.reply_to_message.message_id}"
                     )
                 ]
             ]
             reply_markup = InlineKeyboardMarkup(keyboard)
         else:
-            reported = f"{mention_html(user.id, user.first_name)} reported " \
+            reported = f"{mention_html(user.id, user.first_name)} bildirildi." \
                        f"{mention_html(reported_user.id, reported_user.first_name)} to the admins!"
 
-            msg = f'{mention_html(user.id, user.first_name)} is calling for admins in "{html.escape(chat_name)}"!'
+            msg = f'{mention_html(user.id, user.first_name)} içəri admin çağırır "{html.escape(chat_name)}"!'
             link = ""
             should_forward = True
 
@@ -189,7 +189,7 @@ def report(update: Update, context: CallbackContext) -> str:
                     LOGGER.exception("Exception while reporting user")
 
         message.reply_to_message.reply_text(
-            f"{mention_html(user.id, user.first_name)} reported the message to the admins.",
+            f"{mention_html(user.id, user.first_name)} mesajı administratorlara bildirdi.",
             parse_mode=ParseMode.HTML)
         return msg
 
@@ -201,14 +201,14 @@ def __migrate__(old_chat_id, new_chat_id):
 
 
 def __chat_settings__(chat_id, _):
-    return f"This chat is setup to send user reports to admins, via /report and @admin: `{sql.chat_should_report(chat_id)}`"
+    return f"Bu söhbət istifadəçi hesabatlarını administratorlara /report və @admin vasitəsilə göndərmək üçün qurulub: `{sql.chat_should_report(chat_id)}`"
 
 
 def __user_settings__(user_id):
     if sql.user_should_report(user_id) is True:
-        text = "You will receive reports from chats you're admin."
+        text = "Admin olduğunuz söhbətlərdən hesabatlar alacaqsınız."
     else:
-        text = "You will *not* receive reports from chats you're admin."
+        text = "Admin olduğunuz söhbətlərdən hesabat almayacaqsınız."
     return text
 
 

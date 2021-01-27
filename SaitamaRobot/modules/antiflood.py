@@ -334,10 +334,10 @@ def __chat_settings__(chat_id, user_id):
 
 
 __help__ = """
- - /flood: Flood haqqında məlumat
+ • /flood: Flood haqqında məlumat
 
 Admin only:
- - /setflood <rəqəm/'no'/'off'>: flood yandırmaq və ya flood rəqəmin təyin etmək
+ • /setflood <rəqəm/'no'/'off'>: flood yandırmaq və ya flood rəqəmin təyin etmək
  Misal üçün: /setflood 10
  Əgər istifadəçi 10-dan artıq mesaj atsa səssizə alınacaq.
  """

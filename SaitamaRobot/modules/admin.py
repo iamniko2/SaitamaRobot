@@ -37,14 +37,14 @@ def promote(update: Update, context: CallbackContext) -> str:
 
     if not (promoter.can_promote_members or
             promoter.status == "creator") and not user.id in DRAGONS:
-        message.reply_text("You don't have the necessary rights to do that!")
+        message.reply_text("Bunu etmək üçün lazımi hüquqlarınız yoxdur!")
         return
 
     user_id = extract_user(message, args)
 
     if not user_id:
         message.reply_text(
-            "You don't seem to be referring to a user or the ID specified is incorrect.."
+            "Deyəsən bir istifadəçiyə istinad etmirsiniz və ya göstərilən id səhvdir .."
         )
         return
 
@@ -55,12 +55,12 @@ def promote(update: Update, context: CallbackContext) -> str:
 
     if user_member.status == 'administrator' or user_member.status == 'creator':
         message.reply_text(
-            "How am I meant to promote someone that's already an admin?")
+            "Onsuz da admin olan birini təbliğ etmək üçün necə düşünürəm?")
         return
 
     if user_id == bot.id:
         message.reply_text(
-            "I can't promote myself! Get an admin to do it for me.")
+            "Mən özümü tanıda bilmərəm! Bunu mənim üçün etmək üçün bir admin alın.")
         return
 
     # set same perms as bot - bot can't assign higher perms than itself!
@@ -81,14 +81,14 @@ def promote(update: Update, context: CallbackContext) -> str:
     except BadRequest as err:
         if err.message == "User_not_mutual_contact":
             message.reply_text(
-                "I can't promote someone who isn't in the group.")
+                "Qrupda olmayan birini təbliğ edə bilmirəm.")
         else:
-            message.reply_text("An error occured while promoting.")
+            message.reply_text("Tanıtım zamanı bir səhv baş verdi.")
         return
 
     bot.sendMessage(
         chat.id,
-        f"Sucessfully promoted <b>{user_member.user.first_name or user_id}</b>!",
+        f"Uğurla yüksəldi <b>{user_member.user.first_name or user_id}</b>!",
         parse_mode=ParseMode.HTML)
 
     log_message = (
@@ -454,16 +454,15 @@ def adminlist(update, context):
 
 
 __help__ = """
- • `/admins`*:* list of admins in the chat
+•   /admins: qrupda olan adminlərin siyahısı
 
-*Admins only:*
- • `/pin`*:* silently pins the message replied to - add `'loud'` or `'notify'` to give notifs to users
- • `/unpin`*:* unpins the currently pinned message
- • `/invitelink`*:* gets invitelink
- • `/promote`*:* promotes the user replied to
- • `/demote`*:* demotes the user replied to
- • `/title <title here>`*:* sets a custom title for an admin that the bot promoted
- • `/admincache`*:* force refresh the admins list
+Yalnız adminlər üçün:
+ •  /pin: mesajı sabitləmə 
+ •  /unpin: mesajı sabitləmədən qaldırma
+ •  /invitelink: dəvət linki
+ •  /promote:  admin etmək
+ • /demote: adminlikdən çıxartmaq
+ •  /admincache: admin listi yeniləmək
 """
 
 ADMINLIST_HANDLER = DisableAbleCommandHandler("admins", adminlist)

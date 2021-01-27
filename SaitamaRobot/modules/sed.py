@@ -117,10 +117,13 @@ def sed(update: Update, context: CallbackContext):
 
 
 __help__ = """
- • • s / <text1> / <text2> (/ <flag>): 'text1' -nin bütün mətnlərini 'text2' ilə əvəz edərək, həmin mesaj üzərində sed əməliyyatı yerinə yetirmək üçün bununla bir mesajı cavablandırın. Bayraqlar isteğe bağlıdır və hal-hazırda gözdən salmaq üçün 'i', ümumdünya üçün 'g' və ya heç bir şey yoxdur. Ayırıcılara /, _, | və: daxildir. Mətn qruplaşdırılması dəstəklənir. Nəticədə mesaj 4096-dan böyük ola bilməz.
-Xatırlatma: Sed uyğunluğu asanlaşdırmaq üçün bəzi xüsusi simvollardan istifadə edir, məsələn: + *.? \
-Bu simvollardan istifadə etmək istəyirsinizsə, onlardan qaçdığınızdan əmin olun!
-Misal: \ ?.
+ • `s/<text1>/<text2>(/<flag>)`*:* Reply to a message with this to perform a sed operation on that message, replacing all \
+occurrences of 'text1' with 'text2'. Flags are optional, and currently include 'i' for ignore case, 'g' for global, \
+or nothing. Delimiters include `/`, `_`, `|`, and `:`. Text grouping is supported. The resulting message cannot be \
+larger than {}.
+*Reminder:* Sed uses some special characters to make matching easier, such as these: `+*.?\\`
+If you want to use these characters, make sure you escape them!
+*Example:* \\?.
 """.format(telegram.MAX_MESSAGE_LENGTH)
 
 __mod_name__ = "Sed/Regex"

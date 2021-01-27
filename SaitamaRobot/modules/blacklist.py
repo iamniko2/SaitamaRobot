@@ -459,12 +459,12 @@ Qara siyahılar müəyyən tetikleyicilerin bir qrupda söylənməsini dayandır
 
 DİQQƏT: Qara siyahılar qrup adminlərini təsir etmir.
 
-  •/ qara siyahı: Cari qara siyahıya alınan sözlərə baxın.
+  •/blacklist: Cari qara siyahıya alınan sözlərə baxın.
 
 Yalnız admin:
-  •/ addblacklist <triggers>: Qara siyahıya bir trigger əlavə edin. Hər sətir bir tetikleyici sayılır, buna görə fərqli sətirlərdən istifadə etmək çox tətik əlavə etməyə imkan verəcəkdir.
-  •/ unblacklist <triggers>: tetikleyicileri qara siyahıdan silin. Eyni yeni satır məntiqi burada tətbiq olunur, beləliklə birdən çox tətiyi silə bilərsiniz.
-  •/ blacklistmode <off /del /warn /ban /kick /mute /tban /tmute>: Kimsə qara siyahıya kəlmələr göndərdikdə yerinə yetiriləcək hərəkət.
+  •/addblacklist <triggers>: Qara siyahıya bir trigger əlavə edin. Hər sətir bir tetikleyici sayılır, buna görə fərqli sətirlərdən istifadə etmək çox tətik əlavə etməyə imkan verəcəkdir.
+  •/unblacklist <triggers>: tetikleyicileri qara siyahıdan silin. Eyni yeni satır məntiqi burada tətbiq olunur, beləliklə birdən çox tətiyi silə bilərsiniz.
+  •/blacklistmode <off /del /warn /ban /kick /mute /tban /tmute>: Kimsə qara siyahıya kəlmələr göndərdikdə yerinə yetiriləcək hərəkət.
 """
 BLACKLIST_HANDLER = DisableAbleCommandHandler(
     "blacklist", blacklist, pass_args=True, admin_ok=True)

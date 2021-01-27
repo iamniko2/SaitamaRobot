@@ -66,10 +66,10 @@ def get(update, context, notename, show_none=True, no_format=False):
                         from_chat_id=JOIN_LOGGER,
                         message_id=note.value)
                 except BadRequest as excp:
-                    if excp.message == "Message to forward not found":
+                    if excp.message == "Göndərmə mesajı tapılmadı":
                         message.reply_text(
-                            "This message seems to have been lost - I'll remove it "
-                            "from your notes list.")
+                            "Bu mesaj itirilmiş kimi görünür - siləcəm "
+                            "qeydlər siyahınızdan.")
                         sql.rm_note(note_chat_id, notename)
                     else:
                         raise
@@ -80,12 +80,12 @@ def get(update, context, notename, show_none=True, no_format=False):
                         from_chat_id=chat_id,
                         message_id=note.value)
                 except BadRequest as excp:
-                    if excp.message == "Message to forward not found":
+                    if excp.message == "Göndərmə mesajı tapılmadı":
                         message.reply_text(
-                            "Looks like the original sender of this note has deleted "
-                            "their message - sorry! Get your bot admin to start using a "
-                            "message dump to avoid this. I'll remove this note from "
-                            "your saved notes.")
+                            "Deyəsən bu qeydin orijinal göndəricisi silindi "
+                            "mesajları - bağışlayın! bot admininizi istifadə etməyə başlasın "
+                            "bunun qarşısını almaq üçün mesaj atın. Bu qeyddən siləcəm "
+                            "qeyd etdiyiniz qeydlər.")
                         sql.rm_note(note_chat_id, notename)
                     else:
                         raise
@@ -163,25 +163,25 @@ def get(update, context, notename, show_none=True, no_format=False):
             except BadRequest as excp:
                 if excp.message == "Entity_mention_user_invalid":
                     message.reply_text(
-                        "Looks like you tried to mention someone I've never seen before. If you really "
-                        "want to mention them, forward one of their messages to me, and I'll be able "
-                        "to tag them!")
+                        "Deyəsən əvvəllər görmədiyim birinin adını çəkməyə çalışdın. Həqiqətənsə "
+                        "onlardan bəhs etmək istəyirəm, mesajlarından birini mənə çatdırın və bacaracağam "
+                        "onları etiketləmək üçün!")
                 elif FILE_MATCHER.match(note.value):
                     message.reply_text(
-                        "This note was an incorrectly imported file from another bot - I can't use "
-                        "it. If you really need it, you'll have to save it again. In "
-                        "the meantime, I'll remove it from your notes list.")
+                        "Bu qeyd başqa bir botdan səhvən gətirilmiş bir fayl idi - istifadə edə bilmirəm "
+                        "Əgər həqiqətən ehtiyacınız varsa, onu yenidən saxlamalısınız. İçərisində "
+                        "bu vaxt qeydlər siyahınızdan siləcəm.")
                     sql.rm_note(note_chat_id, notename)
                 else:
                     message.reply_text(
-                        "This note could not be sent, as it is incorrectly formatted. Ask in "
-                        f"@{SUPPORT_CHAT} if you can't figure out why!")
-                    LOGGER.exception("Could not parse message #%s in chat %s",
+                        "Səhv biçimlendirildiyi üçün bu qeyd göndərilə bilmədi. Soruşun "
+                        f"@{SUPPORT_CHAT} Səbəbini anlaya bilmirsinizsə!")
+                    LOGGER.exception("söhbətində #%s mesajı təhlil edilə bilmədi %s",
                                      notename, str(note_chat_id))
-                    LOGGER.warning("Message was: %s", str(note.value))
+                    LOGGER.warning("Mesaj: %s", str(note.value))
         return
     elif show_none:
-        message.reply_text("This note doesn't exist")
+        message.reply_text("Bu qeyd yoxdur")
 
 
 @run_async
@@ -230,29 +230,29 @@ def save(update: Update, context: CallbackContext):
     note_name, text, data_type, content, buttons = get_note_type(msg)
     note_name = note_name.lower()
     if data_type is None:
-        msg.reply_text("Dude, there's no note")
+        msg.reply_text("Dostum, qeyd yoxdur")
         return
 
     sql.add_note_to_db(
         chat_id, note_name, text, data_type, buttons=buttons, file=content)
 
     msg.reply_text(
-        f"Yas! Added `{note_name}`.\nGet it with /get `{note_name}`, or `#{note_name}`",
+        f"Yes! əlavə edildi `{note_name}`.\nəldə edin / əldə edin `{note_name}`, və ya `#{note_name}`",
         parse_mode=ParseMode.MARKDOWN)
 
     if msg.reply_to_message and msg.reply_to_message.from_user.is_bot:
         if text:
             msg.reply_text(
-                "Seems like you're trying to save a message from a bot. Unfortunately, "
-                "bots can't forward bot messages, so I can't save the exact message. "
-                "\nI'll save all the text I can, but if you want more, you'll have to "
-                "forward the message yourself, and then save it.")
+                "Bir mesajı botdan qurtarmaq istədiyin kimi görünür. Təəssüf ki, "
+                "botlar bot mesajlarını ötürə bilmir, ona görə də dəqiq mesajı saxlaya bilmirəm. "
+                "\nBacardığım bütün mətni saxlayacam, amma daha çoxunu istəyirsənsə etməli olacaqsan "
+                "mesajı özünüz yönləndirin və sonra qeyd edin.")
         else:
             msg.reply_text(
-                "Bots are kinda handicapped by telegram, making it hard for bots to "
-                "interact with other bots, so I can't save this message "
-                "like I usually would - do you mind forwarding it and "
-                "then saving that new message? Thanks!")
+                "Botlar telegramla əlil olur və botların işini çətinləşdirir "
+                "digər botlarla qarşılıqlı əlaqədə olduğum üçün bu mesajı saxlaya bilmirəm "
+                "adətən istədiyim kimi - yönləndirməyi düşünmürsən və "
+                "sonra yeni mesajı saxlayırsınız? Təşəkkürlər!")
         return
 
 
@@ -266,10 +266,10 @@ def clear(update: Update, context: CallbackContext):
         notename = args[0].lower()
 
         if sql.rm_note(chat_id, notename):
-            update.effective_message.reply_text("Successfully removed note.")
+            update.effective_message.reply_text("Qeyd uğurla silindi.")
         else:
             update.effective_message.reply_text(
-                "That's not a note in my database!")
+                "Bu mənim verilənlər bazamda bir qeyd deyil!")
 
 
 @run_async
@@ -279,14 +279,14 @@ def clearall(update: Update, context: CallbackContext):
     member = chat.get_member(user.id)
     if member.status != "creator" and user.id not in DRAGONS:
         update.effective_message.reply_text(
-            "Only the chat owner can clear all notes at once.")
+            "Yalnız söhbət sahibi bir anda bütün qeydləri silə bilər.")
     else:
         buttons = InlineKeyboardMarkup([[
             InlineKeyboardButton(
-                text="Delete all notes", callback_data="notes_rmall")
+                text="Bütün qeydləri silin", callback_data="notes_rmall")
         ], [InlineKeyboardButton(text="Cancel", callback_data="notes_cancel")]])
         update.effective_message.reply_text(
-            f"Are you sure you would like to clear ALL notes in {chat.title}? This action cannot be undone.",
+            f"{chat.title}'da BÜTÜN qeydləri silmək istədiyinizə əminsinizmi? Bu əməliyyat geri qaytarıla bilməz..",
             reply_markup=buttons,
             parse_mode=ParseMode.MARKDOWN)
 
@@ -304,23 +304,23 @@ def clearall_btn(update: Update, context: CallbackContext):
                 for notename in note_list:
                     note = notename.name.lower()
                     sql.rm_note(chat.id, note)
-                message.edit_text("Deleted all notes.")
+                message.edit_text("Bütün qeydlər silindi.")
             except BadRequest:
                 return
 
         if member.status == "administrator":
-            query.answer("Only owner of the chat can do this.")
+            query.answer("Bunu yalnız söhbət sahibi edə bilər.")
 
         if member.status == "member":
-            query.answer("You need to be admin to do this.")
+            query.answer("Bunu etmək üçün admin olmalısınız.")
     elif query.data == 'notes_cancel':
         if member.status == "creator" or query.from_user.id in DRAGONS:
-            message.edit_text("Clearing of all notes has been cancelled.")
+            message.edit_text("Bütün qeydlərin silinməsi ləğv edildi.")
             return
         if member.status == "administrator":
-            query.answer("Only owner of the chat can do this.")
+            query.answer("Bunu yalnız söhbət sahibi edə bilər.")
         if member.status == "member":
-            query.answer("You need to be admin to do this.")
+            query.answer("Bunu etmək üçün admin olmalısınız.")
 
 
 @run_async
@@ -343,10 +343,10 @@ def list_notes(update: Update, context: CallbackContext):
 
     if not note_list:
         try:
-            update.effective_message.reply_text("No notes in this chat!")
+            update.effective_message.reply_text("Bu söhbətdə qeyd yoxdur!")
         except BadRequest:
             update.effective_message.reply_text(
-                "No notes in this chat!", quote=False)
+                "Bu söhbətdə qeyd yoxdur!", quote=False)
 
     elif len(msg) != 0:
         update.effective_message.reply_text(msg, parse_mode=ParseMode.MARKDOWN)
@@ -475,9 +475,9 @@ def __import_data__(chat_id, data):
                 chat_id,
                 document=output,
                 filename="failed_imports.txt",
-                caption="These files/photos failed to import due to originating "
-                "from another bot. This is a telegram API restriction, and can't "
-                "be avoided. Sorry for the inconvenience!",
+                caption="Bu fayllar / fotolar mənşəli olduğu üçün idxal edilmədi "
+                "başqa bir botdan. Bu telegram API məhdudlaşdırmasıdır və edə bilməz "
+                "qarşısını almaq. Narahatçılığa görə üzr istəyirik!",
             )
 
 
@@ -491,7 +491,7 @@ def __migrate__(old_chat_id, new_chat_id):
 
 def __chat_settings__(chat_id, user_id):
     notes = sql.get_all_chat_notes(chat_id)
-    return f"There are `{len(notes)}` notes in this chat."
+    return f"Bu söhbətdə `{len(notes)}` qeydləri var."
 
 
 __help__ = """

@@ -623,30 +623,27 @@ def __chat_settings__(chat_id, user_id):
 
 
 __help__ = """
-Do stickers annoy you? or want to avoid people sharing links? or pictures? \
-You're in the right place!
-The locks module allows you to lock away some common items in the \
-telegram world; the bot will automatically delete them!
+Etiketler sizi bezdirir? və ya bağlantıları paylaşan insanların qarşısını almaq istəyirsiniz? yoxsa şəkillər? Doğru yerdəsiniz!
+Kilidlər modulu telegram dünyasındakı bəzi ümumi maddələri kilidləməyə imkan verir; bot onları avtomatik olaraq siləcək!
 
- • `/locktypes`*:* Lists all possible locktypes
+  • /locktypes Mümkün olan bütün yerli tipləri sadalayır
  
-*Admins only:*
- • `/lock <type>`*:* Lock items of a certain type (not available in private)
- • `/unlock <type>`*:* Unlock items of a certain type (not available in private)
- • `/locks`*:* The current list of locks in this chat.
+Yalnız administratorlar:
+  • /lock<növü>: Müəyyən bir tip elementləri kilidləyin (xüsusi olaraq mövcud deyil)
+  • /unnlock<tip>: Müəyyən növ elementlərin kilidini açın (xüsusi olaraq mövcud deyil)
+  • /locks Bu söhbətdəki mövcud kilidlər siyahısı.
  
-Locks can be used to restrict a group's users.
-eg:
-Locking urls will auto-delete all messages with urls, locking stickers will restrict all \
-non-admin users from sending stickers, etc.
-Locking bots will stop non-admins from adding bots to the chat.
+Kilidlər bir qrup istifadəçilərini məhdudlaşdırmaq üçün istifadə edilə bilər.
+məsələn:
+URL-lərin kilidlənməsi url-lərlə bütün mesajları avtomatik siləcək, stikerləri kilidləmək admin olmayan bütün istifadəçilərin stiker göndərməsini məhdudlaşdıracaq və s.
+Botları kilidləmək, administrator olmayanların söhbətə bot əlavə etməsini dayandıracaq.
 
-*Note:*
- • Unlocking permission *info* will allow members (non-admins) to change the group information, such as the description or the group name
- • Unlocking permission *pin* will allow members (non-admins) to pinned a message in a group
+Qeyd:
+  • İcazə məlumatlarının kilidini açmaq üzvlərə (admin olmayanlara) təsvir və ya qrup adı kimi qrup məlumatlarını dəyişdirməyə imkan verəcəkdir.
+  • İcazə pininin kilidini açmaq üzvlərə (administrator olmayanlara) bir qrupda bir mesajı bağlamağa imkan verəcəkdir
 """
 
-__mod_name__ = "Locks"
+__mod_name__ = "Qrup Kilidi"
 
 LOCKTYPES_HANDLER = DisableAbleCommandHandler("locktypes", locktypes)
 LOCK_HANDLER = CommandHandler(

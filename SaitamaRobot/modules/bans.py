@@ -375,13 +375,13 @@ def selfunban(context: CallbackContext, update: Update) -> str:
 
 
 __help__ = """
- • `/punchme`*:* punchs the user who issued the command
+ • /kickme: özünü qrupdan at
 
-*Admins only:*
- • `/ban <userhandle>`*:* bans a user. (via handle, or reply)
- • `/tban <userhandle> x(m/h/d)`*:* bans a user for `x` time. (via handle, or reply). `m` = `minutes`, `h` = `hours`, `d` = `days`.
- • `/unban <userhandle>`*:* unbans a user. (via handle, or reply)
- • `/punch <userhandle>`*:* Punches a user out of the group, (via handle, or reply)
+Admin only:
+ • /ban İstifadəçi adı: istifadəçini ban edər. (mesajına cavab verərəkdə etsəniz olar)
+ • /tban İstifadəçi adı x(m/h/d): qeyd ediyiniz zamana qədər ban edər. (mesajına cavab verərəkdə etsəniz olar). m = minutes, h = hours, d = days.
+ • /unban İstifadəçi adı: istifadəçini unban etmək. (mesajına cavab verərəkdə etsəniz olar)
+ • /kick İstifadəçi adı: ban mute etmədən sadecə qrupdan atmaq, (mesajına cavab verərəkdə etsəniz olar)
 """
 
 BAN_HANDLER = CommandHandler("ban", ban)
@@ -399,7 +399,7 @@ dispatcher.add_handler(UNBAN_HANDLER)
 dispatcher.add_handler(ROAR_HANDLER)
 dispatcher.add_handler(PUNCHME_HANDLER)
 
-__mod_name__ = "Bans"
+__mod_name__ = "Ban"
 __handlers__ = [
     BAN_HANDLER, TEMPBAN_HANDLER, PUNCH_HANDLER, UNBAN_HANDLER, ROAR_HANDLER,
     PUNCHME_HANDLER

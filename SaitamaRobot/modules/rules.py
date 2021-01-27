@@ -107,14 +107,14 @@ def __chat_settings__(chat_id, user_id):
 
 
 __help__ = """
- • `/rules`*:* get the rules for this chat.
+• /qaydalar: bu söhbət üçün qaydaları əldə edin.
 
-*Admins only:*
- • `/setrules <your rules here>`*:* set the rules for this chat.
- • `/clearrules`*:* clear the rules for this chat.
+Yalnız adminler:
+  • /setrules <qaydalarınız burada> bu söhbət üçün qaydaları təyin edin
+  • /clearrules: bu söhbət üçün qaydaları silin.
 """
 
-__mod_name__ = "Rules"
+__mod_name__ = "Qaydalar"
 
 GET_RULES_HANDLER = CommandHandler("rules", get_rules, filters=Filters.group)
 SET_RULES_HANDLER = CommandHandler("setrules", set_rules, filters=Filters.group)

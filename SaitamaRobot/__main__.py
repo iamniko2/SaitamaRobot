@@ -259,7 +259,7 @@ def help_button(update, context):
     try:
         if mod_match:
             module = mod_match.group(1)
-            text = ("Kömək Budur *{}* module:\n".format(
+            text = ("*{}* modulu üçün komək alma menyusundasız:\n".format(
                 HELPABLE[module].__mod_name__) + HELPABLE[module].__help__)
             query.message.edit_text(
                 text=text,

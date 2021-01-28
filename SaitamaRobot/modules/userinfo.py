@@ -250,8 +250,8 @@ def info(update: Update, context: CallbackContext):
                 if status in {"left", "kicked"}:
                     text += _stext.format("Not here")
                 elif status == "member":
-                    text += _stext.format("Detected")
-                elif status in {"administrator", "creator"}:
+                    text += _stext.format("User")
+                elif status in {"Admin", "Creator"}:
                     text += _stext.format("Admin")
     if user_id not in [bot.id, 777000, 1087968824]:
         userhp = hpmanager(user)
@@ -260,7 +260,7 @@ def info(update: Update, context: CallbackContext):
     try:
         spamwtc = sw.get_ban(int(user.id))
         if spamwtc:
-            text += "\n\n<b>This person is Spamwatched!</b>"
+            text += "\n\n<b>Bu şəxs Spam ilə baxıldı!</b>"
             text += f"\nReason: <pre>{spamwtc.reason}</pre>"
             text += "\nAppeal at @SpamWatchSupport"
         else:

@@ -15,11 +15,11 @@ def convert(speed):
 @run_async
 def speedtestxyz(update: Update, context: CallbackContext):
     buttons = [[
-        InlineKeyboardButton("Image", callback_data="speedtest_image"),
-        InlineKeyboardButton("Text", callback_data="speedtest_text")
+        InlineKeyboardButton("Şəkil", callback_data="speedtest_image"),
+        InlineKeyboardButton("Mətn", callback_data="speedtest_text")
     ]]
     update.effective_message.reply_text(
-        "Select SpeedTest Mode", reply_markup=InlineKeyboardMarkup(buttons))
+        "SpeedTest Modu seçin", reply_markup=InlineKeyboardMarkup(buttons))
 
 
 @run_async
@@ -27,12 +27,12 @@ def speedtestxyz_callback(update: Update, context: CallbackContext):
     query = update.callback_query
 
     if query.from_user.id in DEV_USERS:
-        msg = update.effective_message.edit_text('Running a speedtest....')
+        msg = update.effective_message.edit_text('Sürət testi aparılır ....')
         speed = speedtest.Speedtest()
         speed.get_best_server()
         speed.download()
         speed.upload()
-        replymsg = 'SpeedTest Results:'
+        replymsg = 'SpeedTest nəticələri:'
 
         if query.data == 'speedtest_image':
             speedtest_image = speed.results.share()
@@ -42,12 +42,12 @@ def speedtestxyz_callback(update: Update, context: CallbackContext):
 
         elif query.data == 'speedtest_text':
             result = speed.results.dict()
-            replymsg += f"\nDownload: `{convert(result['download'])}Mb/s`\nUpload: `{convert(result['upload'])}Mb/s`\nPing: `{result['ping']}`"
+            replymsg += f"\nYükləmə: `{convert(result['download'])}Mb/s`\nUpload: `{convert(result['upload'])}Mb/s`\nPing: `{result['ping']}`"
             update.effective_message.edit_text(
                 replymsg, parse_mode=ParseMode.MARKDOWN)
     else:
         query.answer(
-            "You are required to join Heroes Association to use this command.")
+            "Bu əmrdən istifadə etmək üçün Qəhrəmanlar Birliyinə qoşulmağınız tələb olunur.")
 
 
 SPEED_TEST_HANDLER = DisableAbleCommandHandler("speedtest", speedtestxyz)

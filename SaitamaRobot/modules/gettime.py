@@ -43,14 +43,14 @@ def generate_time(to_find: str, findtype: List[str]) -> str:
 
     try:
         result = (
-            f'<b>Country:</b> <code>{country_name}</code>\n'
-            f'<b>Zone Name:</b> <code>{country_zone}</code>\n'
-            f'<b>Country Code:</b> <code>{country_code}</code>\n'
-            f'<b>Daylight saving:</b> <code>{daylight_saving}</code>\n'
-            f'<b>Day:</b> <code>{current_day}</code>\n'
-            f'<b>Current Time:</b> <code>{current_time}</code>\n'
-            f'<b>Current Date:</b> <code>{current_date}</code>\n'
-            '<b>Timezones:</b> <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">List here</a>'
+            f'<b>Ölkə:</b> <code>{country_name}</code>\n'
+            f'<b>Zona Adı:</b> <code>{country_zone}</code>\n'
+            f'<b>Ölkə Kodu:</b> <code>{country_code}</code>\n'
+            f'<b>Yaz işığı:</b> <code>{daylight_saving}</code>\n'
+            f'<b>Gün:</b> <code>{current_day}</code>\n'
+            f'<b>Cari vaxt:</b> <code>{current_time}</code>\n'
+            f'<b>Hal-hazırki Tarix:</b> <code>{current_date}</code>\n'
+            '<b>Saat qurşaqları:</b> <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">List here</a>'
         )
     except:
         result = None
@@ -69,7 +69,7 @@ def gettime(update: Update, context: CallbackContext):
             "Provide a country name/abbreviation/timezone to find.")
         return
     send_message = message.reply_text(
-        f"Finding timezone info for <b>{query}</b>", parse_mode=ParseMode.HTML)
+        f"Saat qurşağı haqqında məlumat tapmaq <b>{query}</b>", parse_mode=ParseMode.HTML)
 
     query_timezone = query.lower()
     if len(query_timezone) == 2:
@@ -79,8 +79,8 @@ def gettime(update: Update, context: CallbackContext):
 
     if not result:
         send_message.edit_text(
-            f'Timezone info not available for <b>{query}</b>\n'
-            '<b>All Timezones:</b> <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">List here</a>',
+            f'Saat qurşağı haqqında məlumat mövcud deyil <b>{query}</b>\n'
+            '<b>Bütün saat qurşaqları:</b> <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">List here</a>',
             parse_mode=ParseMode.HTML,
             disable_web_page_preview=True)
         return
@@ -90,7 +90,7 @@ def gettime(update: Update, context: CallbackContext):
 
 
 __help__ = """
- • `/time <query>`*:* Gives information about a timezone.
+ • `/time <query>`*:* Bir saat qurşağı haqqında məlumat verir.
 
 *Available queries:* Country Code/Country Name/Timezone Name
 • 🕐 [Timezones list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)

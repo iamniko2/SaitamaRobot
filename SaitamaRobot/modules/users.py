@@ -89,7 +89,7 @@ def broadcast(update: Update, context: CallbackContext):
                 except TelegramError:
                     failed_user += 1
         update.effective_message.reply_text(
-            f"Broadcast complete.\nGroups failed: {failed}.\nUsers failed: {failed_user}."
+            f"Yayım tamamlandı.\nQruplar uğursuz oldu: {failed}.\nİstifadəçilər uğursuz oldu: {failed_user}."
         )
 
 
@@ -114,7 +114,7 @@ def log_user(update: Update, context: CallbackContext):
 @sudo_plus
 def chats(update: Update, context: CallbackContext):
     all_chats = sql.get_all_chats() or []
-    chatfile = 'List of chats.\n0. Chat name | Chat ID | Members count\n'
+    chatfile = 'Qrupların Siyahı.\n0. Qrup Adları | Qrup ID | Userler\n'
     P = 1
     for chat in all_chats:
         try:
@@ -132,7 +132,7 @@ def chats(update: Update, context: CallbackContext):
         update.effective_message.reply_document(
             document=output,
             filename="groups_list.txt",
-            caption="Here be the list of groups in my database.")
+            caption="Mənim verilənlər bazamdakı qrupların siyahısı.")
 
 
 @run_async
@@ -148,15 +148,15 @@ def chat_checker(update: Update, context: CallbackContext):
 
 def __user_info__(user_id):
     if user_id in [777000, 1087968824]:
-        return """╘══「 Groups count: <code>???</code> 」"""
+        return """╘══「 Ortağ Qruplarınız <code>???</code> 」"""
     if user_id == dispatcher.bot.id:
-        return """╘══「 Groups count: <code>???</code> 」"""
+        return """╘══「 Ortağ Qruplarınız <code>???</code> 」"""
     num_chats = sql.get_user_num_chats(user_id)
-    return f"""╘══「 Groups count: <code>{num_chats}</code> 」"""
+    return f"""╘══「 Ortağ Qruplarınız <code>{num_chats}</code> 」"""
 
 
 def __stats__():
-    return f"• {sql.num_users()} users, across {sql.num_chats()} chats"
+    return f"• {sql.num_users()} istifadəçilər, arasında {sql.num_chats()} chats"
 
 
 def __migrate__(old_chat_id, new_chat_id):

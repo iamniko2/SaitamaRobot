@@ -68,13 +68,13 @@ def list_handlers(update, context):
             filter_list = "*local filters:*\n"
         else:
             chat_name = chat.title
-            filter_list = "*Aktiv Filterlər {}*:\n"
+            filter_list = "*Filters in {}*:\n"
 
     all_handlers = sql.get_chat_triggers(chat_id)
 
     if not all_handlers:
         send_message(update.effective_message,
-                     "Heç bir filtr qeyd edilmədi {}!".format(chat_name))
+                     "No filters saved in {}!".format(chat_name))
         return
 
     for keyword in all_handlers:
@@ -121,7 +121,7 @@ def filters(update, context):
     if not msg.reply_to_message and len(args) < 2:
         send_message(
             update.effective_message,
-            "Zəhmət olmasa cavab vermək üçün bu filtrə klaviatura açar söz təqdim edin!",
+            "Please provide keyboard keyword for this filter to reply with!",
         )
         return
 
@@ -129,7 +129,7 @@ def filters(update, context):
         if len(args) < 2:
             send_message(
                 update.effective_message,
-                "Zəhmət olmasa cavab vermək üçün bu filtr üçün açar söz verin!",
+                "Please provide keyword for this filter to reply with!",
             )
             return
         else:
@@ -157,7 +157,7 @@ def filters(update, context):
         if not text:
             send_message(
                 update.effective_message,
-                 "Qeyd mesajı yoxdur - düymələr ola bilməz, onunla getmək üçün bir mesaja ehtiyacınız var!",
+                "There is no note message - You can't JUST have buttons, you need a message to go with it!",
             )
             return
 
@@ -177,7 +177,7 @@ def filters(update, context):
     elif not text and not file_type:
         send_message(
             update.effective_message,
-            "Xahiş edirəm bu filtr cavabı üçün açar söz verin!",
+            "Please provide keyword for this filter reply with!",
         )
         return
 
@@ -197,7 +197,7 @@ def filters(update, context):
                 msg.reply_to_message.caption) and not text:
             send_message(
                 update.effective_message,
-                "Qeyd mesajı yoxdur - düymələr ola bilməz, onunla getmək üçün bir mesaja ehtiyacınız var!",
+                "There is no note message - You can't JUST have buttons, you need a message to go with it!",
             )
             return
 
@@ -213,7 +213,7 @@ def filters(update, context):
     if add is True:
         send_message(
             update.effective_message,
-            "Yadda saxlanılan filter '{}' Qrup: *{}*!".format(keyword, chat_name),
+            "Saved filter '{}' in *{}*!".format(keyword, chat_name),
             parse_mode=telegram.ParseMode.MARKDOWN,
         )
     raise DispatcherHandlerStop
@@ -234,18 +234,18 @@ def stop_filter(update, context):
     else:
         chat_id = update.effective_chat.id
         if chat.type == "private":
-            chat_name = "Yerli filtrlər"
+            chat_name = "Local filters"
         else:
             chat_name = chat.title
 
     if len(args) < 2:
-        send_message(update.effective_message, "Nəyi dayandırmalıyam?")
+        send_message(update.effective_message, "What should i stop?")
         return
 
     chat_filters = sql.get_chat_triggers(chat_id)
 
     if not chat_filters:
-        send_message(update.effective_message, "Burada filtr aktiv deyil!")
+        send_message(update.effective_message, "No filters active here!")
         return
 
     for keyword in chat_filters:
@@ -253,7 +253,7 @@ def stop_filter(update, context):
             sql.remove_filter(chat_id, args[1])
             send_message(
                 update.effective_message,
-                "Tamam, bu filtrə cavab verməyi dayandıracağam *{}*.".format(
+                "Okay, I'll stop replying to that filter in *{}*.".format(
                     chat_name),
                 parse_mode=telegram.ParseMode.MARKDOWN,
             )
@@ -261,7 +261,7 @@ def stop_filter(update, context):
 
     send_message(
         update.effective_message,
-        "Bu bir filtr deyil - Basın: /filters hazırda aktiv filtrlər əldə etmək.",
+        "That's not a filter - Click: /filters to get currently active filters.",
     )
 
 
@@ -283,7 +283,7 @@ def reply_filter(update, context):
             if MessageHandlerChecker.check_user(update.effective_user.id):
                 return
             filt = sql.get_filter(chat.id, keyword)
-            if filt.reply == "yeni bir cavab olmalıdır":
+            if filt.reply == "there is should be a new reply":
                 buttons = sql.get_buttons(chat.id, filt.keyword)
                 keyb = build_keyboard_parser(context.bot, chat.id, buttons)
                 keyboard = InlineKeyboardMarkup(keyb)
@@ -315,10 +315,10 @@ def reply_filter(update, context):
                                 reply_to_message_id=message.message_id)
                             return
                         except BadRequest as excp:
-                            if excp.message == 'Yanlış uzaqdan identifikator göstərilib: sətirdə səhv doldurulma':
+                            if excp.message == 'Wrong remote file identifier specified: wrong padding in the string':
                                 context.bot.send_message(
                                     chat.id,
-                                    "Mesaj göndərilə bilmədi, etiket idarəsi etibarlıdır?"
+                                    "Message couldn't be sent, Is the sticker id valid?"
                                 )
                                 return
                             else:
@@ -406,7 +406,7 @@ def reply_filter(update, context):
                     except BadRequest:
                         send_message(
                             message,
-                            "Süzgəcin məzmununu göndərmək üçün icazəm yoxdur."
+                            "I don't have the permission to send the content of the filter."
                         )
                 break
             else:
@@ -436,19 +436,19 @@ def reply_filter(update, context):
                             reply_markup=keyboard,
                         )
                     except BadRequest as excp:
-                        if excp.message == "Dəstəklənməyən url protokolu":
+                        if excp.message == "Unsupported url protocol":
                             try:
                                 send_message(
                                     update.effective_message,
-                                    "Deyəsən dəstəklənməyən url protokolundan istifadə etməyə çalışırsınız. "
-                                    "Telegram, tg: // kimi bəzi protokollar üçün düymələri dəstəkləmir. Zəhmət olmasa  cəhd edin"
-                                    "yenidən...",
+                                    "You seem to be trying to use an unsupported url protocol. "
+                                    "Telegram doesn't support buttons for some protocols, such as tg://. Please try "
+                                    "again...",
                                 )
                             except BadRequest as excp:
-                                LOGGER.exception("Filtrlərdə səhv: " +
+                                LOGGER.exception("Error in filters: " +
                                                  excp.message)
                                 pass
-                        elif excp.message == "Cavab mesajı tapılmadı":
+                        elif excp.message == "Reply message not found":
                             try:
                                 context.bot.send_message(
                                     chat.id,
@@ -458,23 +458,23 @@ def reply_filter(update, context):
                                     reply_markup=keyboard,
                                 )
                             except BadRequest as excp:
-                                LOGGER.exception("Filtrlərdə səhv: " +
+                                LOGGER.exception("Error in filters: " +
                                                  excp.message)
                                 pass
                         else:
                             try:
                                 send_message(
                                     update.effective_message,
-                                    "Bu mesaj səhv biçimləndiyindən göndərilə bilmədi.",
+                                    "This message couldn't be sent as it's incorrectly formatted.",
                                 )
                             except BadRequest as excp:
-                                LOGGER.exception("Filtrlərdə səhv: " +
+                                LOGGER.exception("Error in filters: " +
                                                  excp.message)
                                 pass
-                            LOGGER.warning("Mesajı  %s analiz edilə bilmədi",
+                            LOGGER.warning("Message %s could not be parsed",
                                            str(filt.reply))
                             LOGGER.exception(
-                                "Filtr təhlil edilə bilmədi %s söhbətdə %s",
+                                "Could not parse filter %s in chat %s",
                                 str(filt.keyword),
                                 str(chat.id),
                             )
@@ -484,7 +484,7 @@ def reply_filter(update, context):
                     try:
                         send_message(update.effective_message, filt.reply)
                     except BadRequest as excp:
-                        LOGGER.exception("Filtrlərdə səhv: " + excp.message)
+                        LOGGER.exception("Error in filters: " + excp.message)
                         pass
                 break
 
@@ -496,16 +496,16 @@ def rmall_filters(update, context):
     member = chat.get_member(user.id)
     if member.status != "creator" and user.id not in DRAGONS:
         update.effective_message.reply_text(
-            "Yalnız söhbət sahibi bir anda bütün qeydləri silə bilər.")
+            "Only the chat owner can clear all notes at once.")
     else:
         buttons = InlineKeyboardMarkup([[
             InlineKeyboardButton(
-                text="Bütün filtrləri dayandırın", callback_data="filters_rmall")
+                text="Stop all filters", callback_data="filters_rmall")
         ], [
-            InlineKeyboardButton(text="Ləğv et", callback_data="filters_cancel")
+            InlineKeyboardButton(text="Cancel", callback_data="filters_cancel")
         ]])
         update.effective_message.reply_text(
-            f"BÜTÜN filtrləri dayandırmaq istədiyinizə əminsiniz {chat.title}? Bu əməliyyat geri qaytarıla bilməz.",
+            f"Are you sure you would like to stop ALL filters in {chat.title}? This action cannot be undone.",
             reply_markup=buttons,
             parse_mode=ParseMode.MARKDOWN)
 
@@ -520,7 +520,7 @@ def rmall_callback(update, context):
         if member.status == "creator" or query.from_user.id in DRAGONS:
             allfilters = sql.get_chat_triggers(chat.id)
             if not allfilters:
-                msg.edit_text("Bu söhbətdə filtr yoxdur, dayanacaq bir şey yoxdur!")
+                msg.edit_text("No filters in this chat, nothing to stop!")
                 return
 
             count = 0
@@ -532,34 +532,34 @@ def rmall_callback(update, context):
             for i in filterlist:
                 sql.remove_filter(chat.id, i)
 
-            msg.edit_text(f"Təmizləndi {count} filtrlər {chat.title}")
+            msg.edit_text(f"Cleaned {count} filters in {chat.title}")
 
         if member.status == "administrator":
-            query.answer("Bunu yalnız söhbət sahibi edə bilər.")
+            query.answer("Only owner of the chat can do this.")
 
         if member.status == "member":
-            query.answer("Bunu etmək üçün admin olmalısınız.")
+            query.answer("You need to be admin to do this.")
     elif query.data == 'filters_cancel':
         if member.status == "creator" or query.from_user.id in DRAGONS:
-            msg.edit_text("Bütün filtrlərin təmizlənməsi ləğv edildi.")
+            msg.edit_text("Clearing of all filters has been cancelled.")
             return
         if member.status == "administrator":
-            query.answer("Bunu yalnız söhbət sahibi edə bilər.")
+            query.answer("Only owner of the chat can do this.")
         if member.status == "member":
-            query.answer("Bunu etmək üçün admin olmalısınız.")
+            query.answer("You need to be admin to do this.")
 
 
 # NOT ASYNC NOT A HANDLER
 def get_exception(excp, filt, chat):
-    if excp.message == "Dəstəklənməyən url protokolu":
-        return "Deyəsən dəstəklənməyən URL protokolundan istifadə etməyə çalışırsınız. Telegram, tg: // kimi birdən çox protokol üçün açarı dəstəkləmir. Zəhmət olmasa bir daha cəhd edin!"
-    elif excp.message == "Cavab mesajı tapılmadı":
+    if excp.message == "Unsupported url protocol":
+        return "You seem to be trying to use the URL protocol which is not supported. Telegram does not support key for multiple protocols, such as tg: //. Please try again!"
+    elif excp.message == "Reply message not found":
         return "noreply"
     else:
-        LOGGER.warning("Mesaj %s təhlil edilə bilmədi", str(filt.reply))
-        LOGGER.exception("Filtr təhlil edilə bilmədi %s söhbətdə %s",
+        LOGGER.warning("Message %s could not be parsed", str(filt.reply))
+        LOGGER.exception("Could not parse filter %s in chat %s",
                          str(filt.keyword), str(chat.id))
-        return "Bu məlumatlar səhv formatlandığı üçün göndərilə bilmədi."
+        return "This data could not be sent because it is incorrectly formatted."
 
 
 # NOT ASYNC NOT A HANDLER
@@ -567,7 +567,7 @@ def addnew_filter(update, chat_id, keyword, text, file_type, file_id, buttons):
     msg = update.effective_message
     totalfilt = sql.get_chat_triggers(chat_id)
     if len(totalfilt) >= 150:  # Idk why i made this like function....
-        msg.reply_text("Bu qrup maksimum filtr limitinə 150-ə çatdı.")
+        msg.reply_text("This group has reached its max filters limit of 150.")
         return False
     else:
         sql.new_add_filter(chat_id, keyword, text, file_type, file_id, buttons)
@@ -575,7 +575,7 @@ def addnew_filter(update, chat_id, keyword, text, file_type, file_id, buttons):
 
 
 def __stats__():
-    return "• {} filtrlər, qarşıdan {} söhbətlər.".format(sql.num_filters(),
+    return "• {} filters, across {} chats.".format(sql.num_filters(),
                                                    sql.num_chats())
 
 
@@ -592,7 +592,7 @@ def __migrate__(old_chat_id, new_chat_id):
 
 def __chat_settings__(chat_id, user_id):
     cust_filters = sql.get_chat_triggers(chat_id)
-    return "Var `{}` burada xüsusi filtrlər.".format(len(cust_filters))
+    return "There are `{}` custom filters here.".format(len(cust_filters))
 
 
 __help__ = """

@@ -29,14 +29,14 @@ def afk(update: Update, context: CallbackContext):
         reason = args[1]
         if len(reason) > 100:
             reason = reason[:100]
-            notice = "\n100 Herfden Çox Olmaz!"
+            notice = "\nAFK səbəbi 100 simvoldan çox ola bilməz."
     else:
         reason = ""
 
     sql.set_afk(update.effective_user.id, reason)
     fname = update.effective_user.first_name
     try:
-        update.effective_message.reply_text("{} Afk Oldunuz {}".format(
+        update.effective_message.reply_text("{} artıq AFK-dır!{}".format(
             fname, notice))
     except BadRequest:
         pass
@@ -57,9 +57,9 @@ def no_longer_afk(update: Update, context: CallbackContext):
         firstname = update.effective_user.first_name
         try:
             options = [
-                '{} Qayıtdı!', '{} Geldi!', '{} Yenıden Aramızdadı!',
-                '{} Darıxmışdıq!', '{} Yeniden Onlinedir!', '{} Artıq Qayıtdı!',
-                'Xoş Geldin! {}', 'Seni Axtarırdıq! {}?\nSohbetimize Yeniden Geldi!'
+                '{} gəldi!', '{} geri döndü!', '{} artıq qrupdadır!',
+                '{} onlayndır!', '{} artıq onlayndır!', '{} axırki buradadır!',
+                'Xoşgəldin! {}', '{} haradadır?\nHaa qrupdaymış!'
             ]
             chosen_option = random.choice(options)
             update.effective_message.reply_text(chosen_option.format(firstname))
@@ -102,7 +102,7 @@ def reply_afk(update: Update, context: CallbackContext):
                 try:
                     chat = bot.get_chat(user_id)
                 except BadRequest:
-                    print("Xeta: Could not fetch userid {} for AFK module"
+                    print("Error: Could not fetch userid {} for AFK module"
                           .format(user_id))
                     return
                 fst_name = chat.first_name
@@ -124,20 +124,20 @@ def check_afk(update, context, user_id, fst_name, userc_id):
         if not user.reason:
             if int(userc_id) == int(user_id):
                 return
-            res = "{} Afkdır".format(fst_name)
+            res = "{} AFK-dır".format(fst_name)
             update.effective_message.reply_text(res)
         else:
             if int(userc_id) == int(user_id):
                 return
-            res = "{} Afkdır.\nReason: <code>{}</code>".format(
+            res = "{} hazırda AFK-dır.\nSəbəb: <code>{}</code>".format(
                 html.escape(fst_name), html.escape(user.reason))
             update.effective_message.reply_text(res, parse_mode="html")
 
 
 __help__ = """
-  - /afk <səbəb>: özünüzü AFK kimi qeyd edin (klaviaturadan uzaq).
- - brb <səbəb>: afk əmri ilə eyni - ancaq bir əmr deyil.
-AFK olaraq qeyd olunduqda, hər hansı bir qeyd mövcud olmadığınızı bildirən bir şablon mesajla cavablandırılacaqdır!
+ • `/afk <səbəb>`*:* sizi afk olaraq qeyd edər.
+ • `brb <səbəb>`*:* yuxarıdakı ilə eyni əmrdir amma əmr deyil.
+Siz afk olanda kimsə sizi tag etsə, yanıt versə bot ona cavab verəcək
 """
 
 AFK_HANDLER = DisableAbleCommandHandler("afk", afk)

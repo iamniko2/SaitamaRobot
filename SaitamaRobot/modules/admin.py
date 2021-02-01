@@ -457,7 +457,6 @@ __help__ = """
  • `/admins`*:* qrupdakı adminlərin siyahısını verir
 *Sadəcə adminlər:*
  • `/pin`*:* bir mesajı səssizcə sabitləyir - bildiriş göndərmək üçün `'loud'` və ya `'notify'` əlavə edin
- • `/unpin`*:* sabitli mesajın sabitini silir
  • `/invitelink`*:* qrupun dəvət linkini verir
  • `/promote`*:* istifadəçini admin edir
  • `/demote`*:* istifadəçinin adminliyini alır

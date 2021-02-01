@@ -26,12 +26,12 @@ def bl_user(update: Update, context: CallbackContext) -> str:
     user_id, reason = extract_user_and_text(message, args)
 
     if not user_id:
-        message.reply_text("I doubt that's a user.")
+        message.reply_text("Bunun bir istidadəçi olduğuna şüphə ilə yanaşıram.")
         return ""
 
     if user_id == bot.id:
         message.reply_text(
-            "How am I supposed to do my work if I am ignoring myself?")
+            "Özümə məhəl qoymuramsa, işimi necə görməliyəm?")
         return ""
 
     if user_id in BLACKLISTWHITELIST:
@@ -42,7 +42,7 @@ def bl_user(update: Update, context: CallbackContext) -> str:
         target_user = bot.get_chat(user_id)
     except BadRequest as excp:
         if excp.message == "User not found":
-            message.reply_text("I can't seem to find this user.")
+            message.reply_text("Görünür bu istifadəçini tapa bilmirəm.")
             return ""
         else:
             raise
@@ -55,7 +55,7 @@ def bl_user(update: Update, context: CallbackContext) -> str:
         f"<b>User:</b> {mention_html(target_user.id, html.escape(target_user.first_name))}"
     )
     if reason:
-        log_message += f"\n<b>Reason:</b> {reason}"
+        log_message += f"\n<b>Səbəb:</b> {reason}"
 
     return log_message
 
@@ -70,7 +70,7 @@ def unbl_user(update: Update, context: CallbackContext) -> str:
     user_id = extract_user(message, args)
 
     if not user_id:
-        message.reply_text("I doubt that's a user.")
+        message.reply_text("Bunun bir istifadəçi olduğuna şüphə ilə yanaşıram.")
         return ""
 
     if user_id == bot.id:
@@ -143,7 +143,7 @@ def __user_info__(user_id):
         text = text.format("Yes")
         reason = sql.get_reason(user_id)
         if reason:
-            text += f"\nReason: <code>{reason}</code>"
+            text += f"\nSəbəb: <code>{reason}</code>"
     else:
         text = text.format("No")
 

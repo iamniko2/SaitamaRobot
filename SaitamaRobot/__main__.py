@@ -74,7 +74,7 @@ Mənimlə Birlikdə Qruparıvı idarə Edə Bilərsən! :-)
 
 SAITAMA_IMG = "https://i.ibb.co/VvPgXmv/photo-2021-01-27-00-23-47.jpg"
 
-DONATE_STRING = """Kanalımıza Abone Olsan Bəs Edər :) @XTDBotFather"""
+DONATE_STRING = """Kanalımıza Abone Olsan Bəs Edər :) @GroupControlSup"""
 
 IMPORTED = {}
 MIGRATEABLE = []
@@ -192,22 +192,18 @@ def start(update: Update, context: CallbackContext):
                 reply_markup=InlineKeyboardMarkup(
                     [[
                         InlineKeyboardButton(
-                            text="☑️ Nəzarət Bot`u Qrupuva Əlavə Et",
+                            text="☑️ Group Control`u Qrupuva Əlavə Et",
                             url="t.me/{}?startgroup=true".format(
                                 context.bot.username))
                     ],
                      [
                          InlineKeyboardButton(
                              text="Sahibim 👩‍💻",
-                             url=f"https://t.me/najafov_official"),
+                             url=f"https://t.me/Exi099"),
                          InlineKeyboardButton(
                              text="🔔Yeniliklərlə Bağlı Kanalımız",
-                             url="https://t.me/XTDBotFather")
+                             url="https://t.me/GroupControlSup")
                      ],
-                     [
-                         InlineKeyboardButton(
-                             text="Botlarımız 💻",
-                             url="https://t.me/XTDBotFather")
                      ]]))
     else:
         update.effective_message.reply_text(

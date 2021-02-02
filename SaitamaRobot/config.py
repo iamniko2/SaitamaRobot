@@ -15,17 +15,17 @@ class Config(object):
     # REQUIRED
     #Login to https://my.telegram.org and fill in these slots with the details given by it
 
-    API_ID = 2079609  # integer value, dont use ""
-    API_HASH = "5002575d8e3c1852efb7d56634c5f60d"
-    TOKEN = "1665660006:AAHVybFd3MzogbyPGgA11JwqRUfUzm_ugeQ"  #This var used to be API_KEY but it is now TOKEN, adjust accordingly.
-    OWNER_ID = 1346377553  # If you dont know, run the bot and do /id in your private chat with it, also an integer
+    API_ID = 1700811  # integer value, dont use ""
+    API_HASH = "ea4df4bd720aa53fdfcdcd40065cfc26"
+    TOKEN = "1646400333:AAGc8bZV7XWgTktz6SDqkVvx4CTN7TbRZlA"  #This var used to be API_KEY but it is now TOKEN, adjust accordingly.
+    OWNER_ID = 871173916  # If you dont know, run the bot and do /id in your private chat with it, also an integer
     OWNER_USERNAME = "Nicat"
-    SUPPORT_CHAT = 'NezaretAzBot'  #Your own group for support, do not add the @
-    JOIN_LOGGER = -1001220358823  #Prints any new group the bot is added to, prints just the name and ID.
-    EVENT_LOGS = -1001220358823  #Prints information like gbans, sudo promotes, AI enabled disable states that may help in debugging and shit
+    SUPPORT_CHAT = 'Group Control'  #Your own group for support, do not add the @
+    JOIN_LOGGER = -1001431331109  #Prints any new group the bot is added to, prints just the name and ID.
+    EVENT_LOGS = -1001431331109  #Prints information like gbans, sudo promotes, AI enabled disable states that may help in debugging and shit
 
     #RECOMMENDED
-    SQLALCHEMY_DATABASE_URI = 'postgresql://nicat:nicat20040319n@postgresql/postgres'  # needed for any database modules
+    SQLALCHEMY_DATABASE_URI = 'postgresql://nicat.necefov.0102@gmail.com:Nicat123@postgresql/postgres'  # needed for any database modules
     LOAD = []
     NO_LOAD = ['rss', 'cleaner', 'connection', 'math']
     WEBHOOK = False

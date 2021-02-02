@@ -69,7 +69,7 @@ Mənimlə Birlikdə Qruparıvı idarə Edə Bilərsən! :-)
     dispatcher.bot.first_name, ""
     if not ALLOW_EXCL else "\nVə əlavələr:\n")
 
-SAITAMA_IMG = "https://i.ibb.co/wKtYvdg/photo-2021-02-03-00-23-01.jpg"
+SAITAMA_IMG = "https://i.ibb.co/stTchwC/photo-2021-02-03-00-35-24.jpg"
 
 DONATE_STRING = """Kanalımıza Abone Olsan Bəs Edər :)"""
 

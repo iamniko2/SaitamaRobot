@@ -59,14 +59,11 @@ Bütün əmrlər görmək  üçün klik et /help
 HELP_STRINGS = """
 Salam! Mənim Adım *{}*.
 Mənimlə Birlikdə Qruparıvı idarə Edə Bilərsən! :-)
-
 Əsas əmrlər:
  • /help: Kömək menyusu 
  • /help <modul adı>: müəyyən modul haqqında məlumat verir
  • /settings: Ayarları Gosterer
-
 əmrlər / və ya ! ilə işlədilir
-
 {}
 """.format(
     dispatcher.bot.first_name, ""
@@ -74,7 +71,7 @@ Mənimlə Birlikdə Qruparıvı idarə Edə Bilərsən! :-)
 
 SAITAMA_IMG = "https://i.ibb.co/wKtYvdg/photo-2021-02-03-00-23-01.jpg"
 
-DONATE_STRING = """Kanalımıza Abone Olsan Bəs Edər :) @GroupControlSup"""
+DONATE_STRING = """Kanalımıza Abone Olsan Bəs Edər :)"""
 
 IMPORTED = {}
 MIGRATEABLE = []
@@ -192,22 +189,22 @@ def start(update: Update, context: CallbackContext):
                 reply_markup=InlineKeyboardMarkup(
                     [[
                         InlineKeyboardButton(
-                            text="☑️ Group Control`u Qrupuva Əlavə Et",
+                            text="☑️ Group Control Bot`u Qrupuva Əlavə Et",
                             url="t.me/{}?startgroup=true".format(
                                 context.bot.username))
                     ],
                      [
                          InlineKeyboardButton(
                              text="Sahibim 👩‍💻",
-                             url=f"https://t.me/Exi099"),
+                             url=f"https://t.me/exi099"),
                          InlineKeyboardButton(
                              text="🔔Yeniliklərlə Bağlı Kanalımız",
                              url="https://t.me/GroupControlSup")
+                     ],
                      [
                          InlineKeyboardButton(
-                             text="User botumuz 💻",
-                             url="https://t.me/@UserLandResmi")
-                     ],
+                             text="User Botumuz 💻",
+                             url="https://t.me/UserLandResmi")
                      ]]))
     else:
         update.effective_message.reply_text(

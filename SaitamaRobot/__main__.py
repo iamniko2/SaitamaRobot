@@ -72,7 +72,7 @@ Mənimlə Birlikdə Qruparıvı idarə Edə Bilərsən! :-)
     dispatcher.bot.first_name, ""
     if not ALLOW_EXCL else "\nVə əlavələr:\n")
 
-SAITAMA_IMG = "https://i.ibb.co/VvPgXmv/photo-2021-01-27-00-23-47.jpg"
+SAITAMA_IMG = "https://i.ibb.co/wKtYvdg/photo-2021-02-03-00-23-01.jpg"
 
 DONATE_STRING = """Kanalımıza Abone Olsan Bəs Edər :) @GroupControlSup"""
 
@@ -203,6 +203,10 @@ def start(update: Update, context: CallbackContext):
                          InlineKeyboardButton(
                              text="🔔Yeniliklərlə Bağlı Kanalımız",
                              url="https://t.me/GroupControlSup")
+                     [
+                         InlineKeyboardButton(
+                             text="User botumuz 💻",
+                             url="https://t.me/@UserLandResmi")
                      ],
                      ]]))
     else:

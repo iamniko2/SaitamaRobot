@@ -334,14 +334,14 @@ if is_module_loaded(FILENAME):
     dispatcher.add_handler(TOGGLE_HANDLER)
 
     __help__ = """
-    • `/cmds`*:* check the current status of disabled commands
+    • `/cmds`*:* əlil əmrlərin cari vəziyyətini yoxlayın
 
-    *Admins only:*
-    • `/enable <cmd name>`*:* enable that command
-    • `/disable <cmd name>`*:* disable that command
-    • `/enablemodule <module name>`*:* enable all commands in that module
-    • `/disablemodule <module name>`*:* disable all commands in that module
-    • `/listcmds`*:* list all possible toggleable commands
+    *Yalnız administratorlar:*
+    • `/enable <cmd name>`*:* bu əmri təmin edin
+    • `/disable <cmd name>`*:* bu əmri deaktiv edin
+    • `/enablemodule <module name>`*:* həmin moduldakı bütün əmrləri aktivləşdirin
+    • `/disablemodule <module name>`*:* həmin moduldakı bütün əmrləri söndürün
+    • `/listcmds`*:* bütün mümkün dəyişdirilə bilən əmrləri sadalayın
     """
 
     __mod_name__ = "Command disabling"

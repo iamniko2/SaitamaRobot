@@ -78,25 +78,23 @@ def markdown_help(update: Update, context: CallbackContext):
 
 __help__ = """
 *Available commands:*
-*Markdown:*
- • `/markdownhelp`*:* quick summary of how markdown works in telegram - can only be called in private chats
 *Paste:*
- • `/paste`*:* Saves replied content to `nekobin.com` and replies with a url
+ • `/paste`*:* Cavablandırılmış məzmunu `nekobin.com`a saxlayır və url ilə cavab verir
 *React:*
- • `/react`*:* Reacts with a random reaction 
+ • `/react`*:* Təsadüfi reaksiya ilə reaksiya verir
 *Urban Dictonary:*
- • `/ud <word>`*:* Type the word or expression you want to search use
+ • `/ud <word>`*:* Axtarışda istifadə etmək istədiyiniz sözü və ya ifadəni yazın
 *Wikipedia:*
  • `/wiki <query>`*:* wikipedia your query
 *Wallpapers:*
- • `/wall <query>`*:* get a wallpaper from wall.alphacoders.com
+ • `/wall <query>`*:* wall.alphacoders.com saytından divar kağızı alın
 *Currency converter:* 
- • `/cash`*:* currency converter
-Example:
- `/cash 1 USD INR`  
+ • `/valyuta`*:* valyuta çeviricisi
+Misal:
+ `/valyuta 1 USD INR`  
       _OR_
- `/cash 1 usd inr`
-Output: `1.0 USD = 75.505 INR`
+ `/valyuta 1 usd inr`
+Çıxış: `1.0 USD = 75.505 INR`
 """
 
 ECHO_HANDLER = DisableAbleCommandHandler("echo", echo, filters=Filters.group)
